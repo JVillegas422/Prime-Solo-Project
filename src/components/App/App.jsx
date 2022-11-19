@@ -20,6 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+// New Components
+import SearchForm from '../SearchForm/SearchForm';
+
 import './App.css';
 
 function App() {
@@ -109,6 +112,13 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            exact
+            path="/search"
+          >
+            <SearchForm />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

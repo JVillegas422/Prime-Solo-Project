@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 // New Components
+import DailyEntry from '../DailyEntry/DailyEntry';
 import SearchForm from '../SearchForm/SearchForm';
 
 import './App.css';
@@ -112,6 +113,13 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            exact
+            path="/daily_entry"
+          >
+            <DailyEntry />
+          </ProtectedRoute>
 
           <ProtectedRoute
             exact

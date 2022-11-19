@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 
 // Add new saga's
 import searchSaga from './search.saga';
+import dailyEntry from './dailyEntry.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    searchSaga()
+    searchSaga(),
+    dailyEntry()
   ]);
 }

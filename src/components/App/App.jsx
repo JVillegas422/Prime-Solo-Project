@@ -116,7 +116,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/entry-form"
+            path="/daily_entry"
           >
             <DailyEntry />
           </ProtectedRoute>

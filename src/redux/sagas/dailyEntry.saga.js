@@ -4,10 +4,10 @@ import axios from 'axios';
 
 function* addNewEntry(action) {
     try {
-        const result = yield axios.post('/api/daily-entry', action.payload);
-        yield put({ type: 'FETCH_NEW_ENTRY', payload: result.data.daily_entry_id});
+        yield axios.post('/api/daily_entry', action.payload);
+        yield put({ type: 'FETCH_NEW_ENTRY' });
     } catch (error) {
-        console.error('Error in fetch prescription', error)
+        console.error('Error in addNewEntry', error);
     }
 }
 
@@ -24,11 +24,11 @@ function* addNewEntry(action) {
 // }
 
 
-function* newEntrySaga() {
+function* dailyEntry() {
     yield takeLatest('ADD_NEW_ENTRY', addNewEntry);
 
     // yield takeLatest('FETCH_ENTRY', fetchNewEntry);
 
 }
 
-export default newEntrySaga;
+export default dailyEntry;

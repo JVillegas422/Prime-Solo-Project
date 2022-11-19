@@ -15,10 +15,10 @@ function DailyEntry() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [newPrescription, setNewPrescription] = useState({});
+    const [newEntry, setNewEntry] = useState({});
     
-    const handleNewPrescription = (evt) => {
-        setNewPrescription({ ...newPrescription, [evt.target.name]: evt.target.value })
+    const onHandleNewEntry = (evt) => {
+        setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
     }
 
 
@@ -26,7 +26,7 @@ function DailyEntry() {
         evt.preventDefault();
         dispatch({
             type: 'ADD_NEW_ENTRY',
-            payload: newPrescription
+            payload: newEntry
         })
         history.push('/');
     }
@@ -58,7 +58,7 @@ function DailyEntry() {
                     label="Prescription Name"
                     placeholder="Prescription Name"
                     variant="filled"
-                    onChange={handleNewPrescription}
+                    onChange={onHandleNewEntry}
                     name="prescription_name"
                 />
 
@@ -68,7 +68,7 @@ function DailyEntry() {
                     label="Prescription Amount"
                     placeholder="Prescription Amount"
                     variant="filled"
-                    onChange={handleNewPrescription}
+                    onChange={onHandleNewEntry}
                     name="prescription_amount"
                 />
 
@@ -78,7 +78,7 @@ function DailyEntry() {
                     label="Time"
                     placeholder="Time"
                     variant="filled"
-                    onChange={handleNewPrescription}
+                    onChange={onHandleNewEntry}
                     name="tstz"
                 />
 
@@ -88,7 +88,7 @@ function DailyEntry() {
                     label="Quantity"
                     placeholder="Quantity"
                     variant="filled"
-                    onChange={handleNewPrescription}
+                    onChange={onHandleNewEntry}
                     name="quantity"
                 />
 
@@ -98,7 +98,7 @@ function DailyEntry() {
                     label="Notes"
                     placeholder="Notes"
                     variant="filled"
-                    onChange={handleNewPrescription}
+                    onChange={onHandleNewEntry}
                     name="notes"
                 />
 

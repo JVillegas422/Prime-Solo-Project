@@ -5,7 +5,8 @@ function SearchForm() {
     console.log('in SearchForm');
     const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useState('');
-    const results = useSelector(store => store.searchRouter);
+    const results = useSelector(store => store.searchReducer);
+    const searchResults = results.searchList;
 
     let newArr = [];
     searchResults.forEach((searchResult) => {

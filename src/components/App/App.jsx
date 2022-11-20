@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // New Components
 import DailyEntry from '../DailyEntry/DailyEntry';
 import SearchForm from '../SearchForm/SearchForm';
+import EntryHistory from '../EntryHistory/EntryHistory';
 
 import './App.css';
 
@@ -119,6 +120,13 @@ function App() {
             path="/daily_entry"
           >
             <DailyEntry />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/history"
+          >
+            <EntryHistory />
           </ProtectedRoute>
 
           <ProtectedRoute

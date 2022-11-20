@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-// const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // router.get('/', (req, res) => {
 
@@ -21,26 +21,47 @@ const router = express.Router();
 
 // });
 
+router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log('GET all entries');
+    let user_id = req.user.id;
+    const sqlParams = [user_id];
 
-router.get('/:id', (req, res) => {
+    const sqlQuery = `
+        SELECT "id", "prescription_name", "prescription_amount", "tstz", "quantity", "notes" FROM "daily_entry"
+        WHERE "user_id" = $1
+        ORDER BY "tstz";
+    `;
 
-  const sqlQuery = `
-  SELECT * FROM daily_entry
-  WHERE id = $1;
-  `;
+    pool.query(sqlQuery, sqlParams)
+        .then((dbRes) => {
+            res.send(dbRes.rows);
+            console.log(dbRes.rows);
+        })
+        .catch((err) => {
+            console.log('Error making database query', err);
+        });
+});
 
-  const sqlParams = [id];
 
-  pool.query(sqlQuery, sqlParams)
-      .then(result => {
-          res.send(result.rows[0]);
-      })
-      .catch(error => {
-          console.log('error in get request', error)
-          res.sendStatus(500);
-      })
+// router.get('/:id', (req, res) => {
 
-})
+//   const sqlQuery = `
+//   SELECT * FROM daily_entry
+//   WHERE id = $1;
+//   `;
+
+//   const sqlParams = [id];
+
+//   pool.query(sqlQuery, sqlParams)
+//       .then(result => {
+//           res.send(result.rows[0]);
+//       })
+//       .catch(error => {
+//           console.log('error in get request', error)
+//           res.sendStatus(500);
+//       })
+
+// })
 
 router.post('/', (req, res) => {
   let user_id = req.user.id;
@@ -67,7 +88,7 @@ router.post('/', (req, res) => {
           res.sendStatus(201);
       })
       .catch(error => {
-          console.error('error adding in medform', error);
+          console.error('error adding in daily entry form', error);
           res.sendStatus(500)
       });
 });

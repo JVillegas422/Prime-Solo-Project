@@ -28,7 +28,8 @@ function DailyEntry() {
             type: 'ADD_NEW_ENTRY',
             payload: newEntry
         })
-        history.push('/');
+        console.log('here is a newEntry', newEntry);
+        // history.push('/');
     }
 
     return (

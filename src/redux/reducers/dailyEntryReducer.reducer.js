@@ -1,13 +1,20 @@
 
-const dailyEntryReducer = (state =[], action) => {
+const dailyEntryReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_NEW_ENTRY':
+        case 'SET_ENTRY_HISTORY':
             return action.payload;
-        case 'CLEAR_NEW ENTRY':
-            return [];
         default:
             return state;
     }
 }
+
+// all the entries from the DB
+// const dailyEntryReducer = (state = [], action) => {
+//     if(action.type === 'SET_ENTRY_HISTORY') {
+//         return action.payload;
+//     }
+
+//     return state;
+// }
 
 export default dailyEntryReducer;

@@ -20,6 +20,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     searchSaga(),
-    dailyEntry()
+    dailyEntry(),
   ]);
 }

@@ -10,13 +10,20 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 
+// Material-UI imports
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 function DailyEntry() {
     console.log('in DailyEntry');
 
     const dispatch = useDispatch();
     const history = useHistory();
     const [newEntry, setNewEntry] = useState({});
-    
+    const [value, setValue] = React.useState(dayjs('2022-04-07'));
+
     const onHandleNewEntry = (evt) => {
         setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
     }
@@ -82,6 +89,17 @@ function DailyEntry() {
                     onChange={onHandleNewEntry}
                     name="tstz"
                 />
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                        renderInput={(props) => <TextField {...props} />}
+                        label="DateTimePicker"
+                        value={value}
+                        onChange={(newValue) => {
+                        setValue(newValue);
+                        }}
+                    />
+                    </LocalizationProvider>
 
                 <TextField
                     required

@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     const sqlParams = [
       user_id,
       newPrescription.prescription,
-      nenewPrescriptionwEntry.dosage,
+      newPrescription.dosage,
       newPrescription.count,
       newPrescription.description,
     ];

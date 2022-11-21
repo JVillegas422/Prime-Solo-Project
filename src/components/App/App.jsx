@@ -26,6 +26,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import EntryHistory from '../EntryHistory/EntryHistory';
 import EntryHistoryTest from '../EntryHistoryTest/EntryHistoryTest';
 import MedList from '../MedList/MedList';
+import PrescriptionForm from '../PrescriptionForm/PrescriptionForm';
 import './App.css';
 
 function App() {
@@ -149,6 +150,13 @@ function App() {
             path="/home"
           >
             <MedList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/prescriptionForm"
+          >
+            <PrescriptionForm />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

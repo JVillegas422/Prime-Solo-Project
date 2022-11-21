@@ -36,6 +36,10 @@ function Nav() {
               Daily Entry
             </Link>
 
+            <Link className="navLink" to="/prescriptionForm">
+              Add Prescription
+            </Link>
+
             <Link className="navLink" to="/search">
               Search Page
             </Link>

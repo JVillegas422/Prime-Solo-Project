@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import prescriptionsSaga from './prescriptionsSaga.saga';
 
 // Add new saga's
 import searchSaga from './search.saga';
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     userSaga(),
     searchSaga(),
     dailyEntry(),
+    prescriptionsSaga()
   ]);
 }

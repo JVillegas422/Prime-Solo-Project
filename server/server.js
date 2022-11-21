@@ -13,7 +13,11 @@ const userRouter = require('./routes/user.router');
 // Search router
 const searchRouter = require('./routes/search.router');
 
+// Daily Entry router
 const dailyEntryRouter = require('./routes/dailyEntry.router');
+
+// Prescriptions router
+const PrescriptionsRouter = require('./routes/prescriptions.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +34,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/daily_entry', dailyEntryRouter);
+app.use('/api/prescriptions', PrescriptionsRouter);
 
 // Serve static files
 app.use(express.static('build'));

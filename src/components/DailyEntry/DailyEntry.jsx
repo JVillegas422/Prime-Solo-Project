@@ -29,7 +29,7 @@ function DailyEntry() {
             payload: newEntry
         })
         console.log('here is a newEntry', newEntry);
-        // history.push('/');
+        history.push('/testHistory');
     }
 
     return (
@@ -118,7 +118,7 @@ function DailyEntry() {
                 label="Back to My MedList"
                 color="primary"
                 sx={{ m: 4, height: 40 }}
-                onClick={() => { history.push('/')}}
+                onClick={() => { history.push('/home')}}
             />
         </>
     );

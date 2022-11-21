@@ -24,7 +24,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import DailyEntry from '../DailyEntry/DailyEntry';
 import SearchForm from '../SearchForm/SearchForm';
 import EntryHistory from '../EntryHistory/EntryHistory';
-
+import EntryHistoryTest from '../EntryHistoryTest/EntryHistoryTest';
+import MedList from '../MedList/MedList';
 import './App.css';
 
 function App() {
@@ -103,7 +104,7 @@ function App() {
 
           <Route
             exact
-            path="/home"
+            path="/user"
           >
             {user.id ?
               // If the user is already logged in, 
@@ -134,6 +135,20 @@ function App() {
             path="/search"
           >
             <SearchForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/testHistory"
+          >
+            <EntryHistoryTest />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/home"
+          >
+            <MedList />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

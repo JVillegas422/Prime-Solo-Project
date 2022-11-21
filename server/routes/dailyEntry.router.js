@@ -3,24 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// router.get('/', (req, res) => {
-
-//   const query = `
-//     SELECT * FROM user_prescriptions 
-//     ORDER BY "prescription_name" ASC;
-//   `;
-
-//   pool.query(query)
-//     .then( result => {
-//       res.send(result.rows);
-//     })
-//     .catch(err => {
-//       console.log('ERROR: Get all user prescriptions', err);
-//       res.sendStatus(500)
-//     })
-
-// });
-
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('GET all entries');
     let user_id = req.user.id;
@@ -41,27 +23,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             console.log('Error making database query', err);
         });
 });
-
-
-// router.get('/:id', (req, res) => {
-
-//   const sqlQuery = `
-//   SELECT * FROM daily_entry
-//   WHERE id = $1;
-//   `;
-
-//   const sqlParams = [id];
-
-//   pool.query(sqlQuery, sqlParams)
-//       .then(result => {
-//           res.send(result.rows[0]);
-//       })
-//       .catch(error => {
-//           console.log('error in get request', error)
-//           res.sendStatus(500);
-//       })
-
-// })
 
 router.post('/', (req, res) => {
   let user_id = req.user.id;

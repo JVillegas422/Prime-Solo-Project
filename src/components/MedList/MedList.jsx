@@ -1,170 +1,184 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import { useDispatch, useSelector } from 'react-redux';
 
-function UserMedList() {
-    console.log('In UserMedList');
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import MedicationIcon from '@mui/icons-material/Medication';
+import MedicationTwoToneIcon from '@mui/icons-material/MedicationTwoTone';
+import IconButton from '@mui/material/IconButton';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-    return (
-        <>
-            <h3>User Med List!</h3>
-        </>
-    );
+// MUI Chip
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
+
+function generate(element) {
+  return [0, 1, 2].map((value) =>
+    React.cloneElement(element, {
+      key: value,
+    }),
+  );
 }
 
-// export default UserMedList;
-
-// import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom'
-// import React, { useState } from 'react';
-
-// // Material-UI imports listed down below
-// import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-// import Typography from '@mui/material/Typography';
-// import FormControl from '@mui/material/FormControl';
-// import Chip from '@mui/material/Chip';
-
-// function DailyEntry() {
-//     console.log('in DailyEntry');
-
-//     const dispatch = useDispatch();
-//     const history = useHistory();
-//     // const [newEntry, setNewEntry] = useState({});
+function MedList() {
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((store) => store.user);
+  const prescriptions = useSelector(store => store.prescriptionsReducer);
+  console.log('user prescriptions ****', prescriptions);
     
-//     // const onHandleNewEntry = (evt) => {
-//     //     setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
-//     // }
 
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_PRESCRIPTION_LIST'
+        })
+    }, [])
 
-//     //  const addNewEntry = (evt) => {
-//     //     evt.preventDefault();
-//     //     dispatch({
-//     //         type: 'ADD_NEW_ENTRY',
-//     //         payload: newEntry
-//     //     })
-//     //     // history.push('/');
-//     // }
-
-//     const [prescription_name, setPrescription_name] = useState('');
-//     const [prescription_amount, setPrescription_amount] = useState('');
-//     const [tstz, setTstz] = useState('');
-//     const [quantity, setQuantity] = useState('');
-//     const [notes, setNotes] = useState('');
-
-//     const handleAdd = () => {
-//         console.log('in handleClick');
-//         const newEntry = {
-//             prescription_name: prescription_name,
-//             prescription_amount: prescription_amount,
-//             tstz: tstz,
-//             quantity: quantity,
-//             notes: notes,
-//         }
-//         dispatch({
-//             type: 'ADD_NEW_ENTRY',
-//             payload: newEntry
-//         })
-//         // clear inputs
-//         setPrescription_name('');
-//         setPrescription_amount('');
-//         setTstz('');
-//         setQuantity('');
-//         setNotes('');
-
-//         history.push('/medication');
-//     }
-
-//     return (
-//         <>
-//             <Typography variant='h3' mt={2} sx={{ p: 3 }}>
-//                 Create Entry Form
-//             </Typography>     
-
-//             <Box 
-//                 className='myBox'
-//                 component="form" 
-//                 mx={'auto'}
-//                 sx={{ 
-//                     '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' ,bgcolor: 'white',  },
-//                     color: 'text.primary'
-//                 }}
-//                 noValidate
-//                 autoComplete="off"
-//                 onSubmit={(event) => addNewEntry(event)}
-//             >
-//                 <FormControl
-//                     sx= {{ bgcolor: 'grey.400'}}
-//                 >
-//                 <TextField
-//                     required
-//                     id="filled-required"
-//                     label="Prescription Name"
-//                     placeholder="Prescription Name"
-//                     variant="filled"
-//                     onChange={onHandleNewEntry}
-//                     name="prescription_name"
-//                 />
-
-//                 <TextField
-//                     required
-//                     id="filled-required"
-//                     label="Prescription Amount"
-//                     placeholder="Prescription Amount"
-//                     variant="filled"
-//                     onChange={onHandleNewEntry}
-//                     name="prescription_amount"
-//                 />
-
-//                 <TextField
-//                     required
-//                     id="filled-required"
-//                     label="Time"
-//                     placeholder="Time"
-//                     variant="filled"
-//                     onChange={onHandleNewEntry}
-//                     name="tstz"
-//                 />
-
-//                 <TextField
-//                     required
-//                     id="filled-required"
-//                     label="Quantity"
-//                     placeholder="Quantity"
-//                     variant="filled"
-//                     onChange={onHandleNewEntry}
-//                     name="quantity"
-//                 />
-
-//                 <TextField
-//                     required
-//                     id="filled-required"
-//                     label="Notes"
-//                     placeholder="Notes"
-//                     variant="filled"
-//                     onChange={onHandleNewEntry}
-//                     name="notes"
-//                 />
-
-//                 <Button
-//                     type="submit"
-//                     variant="contained"
-//                     sx={{ p: 2 }}
-//                 >
-//                     Save Entry
-//                 </Button>
-//                 </FormControl>
-                
-//             </Box>
+  return (
+    <>
+    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+        
+        <div className="container">
+            <h2>Welcome, {user.username}!</h2>
             
-//             <Chip 
-//                 label="Back to My MedList"
-//                 color="primary"
-//                 sx={{ m: 4, height: 40 }}
-//                 onClick={() => { history.push('/')}}
-//             />
-//         </>
-//     );
-// }
+        </div>
 
-// export default DailyEntry;
+      <FormGroup row>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={dense}
+              onChange={(event) => setDense(event.target.checked)}
+            />
+          }
+          label="Enable dense"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={secondary}
+              onChange={(event) => setSecondary(event.target.checked)}
+            />
+          }
+          label="View prescription info"
+        />
+      </FormGroup>
+      
+        <Grid item xs={12} md={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+            My Prescription List
+          </Typography>
+            <List dense={dense}>
+              {generate(
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar sx={{ bgcolor: "#1976d2" }}>
+                      <MedicationTwoToneIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Medication List"
+                    secondary={secondary ? 'See prescription information right here!' : null}
+                  />
+                </ListItem>,
+              )}
+              <h3>Prescription List</h3>
+              <table>
+                    <thead>
+                        <tr>
+                            <th>Prescription Name</th>
+                            <th>Dosage</th>
+                            <th>Count</th>
+                            <th>Description</th>
+                        </tr>
+                        
+                        {prescriptions.map(item => {
+                            return (
+                                <tr key={item.id}>
+                                    <td>
+                                        {item.prescription}
+                                    </td>
 
+                                    <td>
+                                        {item.dosage}
+                                    </td>
+
+                                    <td>
+                                        {item.count}
+                                    </td>
+
+                                    <td>
+                                        {item.description}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </thead>
+                </table>
+            </List>
+            <Stack direction="row" spacing={1}>
+                <Chip icon={<MedicationLiquidIcon />} label="Take Medz Now" variant="outlined" onClick={() => { history.push('/daily_entry')}}/>
+            </Stack>
+        </Grid>
+
+        {/* <Stack direction="row" spacing={1}>
+            <Chip icon={<MedicationLiquidIcon />} label="Take Medz Now" variant="outlined" />
+        </Stack> */}
+    </Box>
+    {/* <table>
+                    <thead>
+                        <tr>
+                            <th>Prescription Name</th>
+                            <th>Dosage</th>
+                            <th>Count</th>
+                            <th>Description</th>
+                        </tr>
+                        
+                        {prescriptions.map(prescription => {
+                            return (
+                                <tr key={prescription.id}>
+                                    <td>
+                                        {prescription.prescription}
+                                    </td>
+
+                                    <td>
+                                        {prescription.dosage}
+                                    </td>
+
+                                    <td>
+                                        {prescription.count}
+                                    </td>
+
+                                    <td>
+                                        {prescription.description}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </thead>
+                </table> */}
+    </>
+  );
+}
+
+export default MedList;

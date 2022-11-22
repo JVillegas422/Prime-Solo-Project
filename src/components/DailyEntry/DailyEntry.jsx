@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 
 // Material-UI imports
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -21,23 +21,55 @@ function DailyEntry() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [newEntry, setNewEntry] = useState({});
-    const [value, setValue] = React.useState(dayjs('2022-04-07'));
+    // const [newEntry, setNewEntry] = useState({});
+    // const [value, setValue] = React.useState(dayjs('2022-11-22'));
 
-    const onHandleNewEntry = (evt) => {
-        setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
-    }
+    const [prescription_name, setPrescription_Name] = useState('');
+    const [prescription_amount, setPrescription_Amount] = useState('');
+    const [tstz, setTstz] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [notes, setNotes] = useState('');
 
-
-     const addNewEntry = (evt) => {
-        evt.preventDefault();
+    const addNewEntry = () => {
+        console.log('in handleClick');
+        const newEntry = {
+            prescription_name: prescription_name,
+            prescription_amount: prescription_amount,
+            tstz: tstz,
+            quantity: quantity,
+            notes: notes,
+        }
         dispatch({
             type: 'ADD_NEW_ENTRY',
             payload: newEntry
         })
-        console.log('here is a newEntry', newEntry);
+        // clear inputs
+        setPrescription_Name('');
+        setPrescription_Amount('');
+        setTstz('');
+        setQuantity('');
+        setNotes('');
         history.push('/testHistory');
     }
+
+    const handleAddDate = (value) => {
+        console.log('in handleAddDate Value is:', value.$d)
+        setTstz(value);
+    } 
+
+    // const onHandleNewEntry = (evt) => {
+    //     setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
+    // }
+
+    //  const addNewEntry = (evt) => {
+    //     evt.preventDefault();
+    //     dispatch({
+    //         type: 'ADD_NEW_ENTRY',
+    //         payload: newEntry
+    //     })
+    //     console.log('here is a newEntry', newEntry);
+    //     history.push('/testHistory');
+    // }
 
     return (
         <>
@@ -55,7 +87,7 @@ function DailyEntry() {
                 }}
                 noValidate
                 autoComplete="off"
-                onSubmit={(event) => addNewEntry(event)}
+                // onSubmit={(event) => addNewEntry(event)}
             >
                 <FormControl
                     sx= {{ bgcolor: 'grey.400'}}
@@ -66,8 +98,8 @@ function DailyEntry() {
                     label="Prescription Name"
                     placeholder="Prescription Name"
                     variant="filled"
-                    onChange={onHandleNewEntry}
-                    name="prescription_name"
+                    onChange={(event) => setPrescription_Name(event.target.value)}
+                    value={prescription_name}
                 />
 
                 <TextField
@@ -76,11 +108,11 @@ function DailyEntry() {
                     label="Prescription Amount"
                     placeholder="Prescription Amount"
                     variant="filled"
-                    onChange={onHandleNewEntry}
-                    name="prescription_amount"
+                    onChange={(event) => setPrescription_Amount(event.target.value)}
+                    value={prescription_amount}
                 />
 
-                <TextField
+                {/* <TextField
                     required
                     id="filled-required"
                     label="Time"
@@ -88,15 +120,27 @@ function DailyEntry() {
                     variant="filled"
                     onChange={onHandleNewEntry}
                     name="tstz"
-                />
+                /> */}
 
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateTimePicker
                         renderInput={(props) => <TextField {...props} />}
                         label="DateTimePicker"
                         value={value}
                         onChange={(newValue) => {
                         setValue(newValue);
+                        }}
+                    />
+                    </LocalizationProvider> */}
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                        value={tstz}
+                        onChange={handleAddDate}
+                        label="DateTimePicker" 
+                        variant="outlined" 
+                        renderInput={(params) => {
+                            return <TextField {...params} />;
                         }}
                     />
                     </LocalizationProvider>
@@ -107,8 +151,8 @@ function DailyEntry() {
                     label="Quantity"
                     placeholder="Quantity"
                     variant="filled"
-                    onChange={onHandleNewEntry}
-                    name="quantity"
+                    onChange={(event) => setQuantity(event.target.value)}
+                    value={quantity}
                 />
 
                 <TextField
@@ -117,14 +161,15 @@ function DailyEntry() {
                     label="Notes"
                     placeholder="Notes"
                     variant="filled"
-                    onChange={onHandleNewEntry}
-                    name="notes"
+                    onChange={(event) => setNotes(event.target.value)}
+                    value={notes}
                 />
 
                 <Button
                     type="submit"
                     variant="contained"
                     sx={{ p: 2 }}
+                    onClick={addNewEntry}
                 >
                     Save Entry
                 </Button>

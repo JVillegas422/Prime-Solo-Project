@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 
 // Material-UI imports
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -22,11 +22,11 @@ function DailyEntry() {
     const dispatch = useDispatch();
     const history = useHistory();
     // const [newEntry, setNewEntry] = useState({});
-    // const [value, setValue] = React.useState(dayjs('2022-11-22'));
+    const [tstz, setTstz] = useState(dayjs('2022-11-22'));
 
     const [prescription_name, setPrescription_Name] = useState('');
     const [prescription_amount, setPrescription_Amount] = useState('');
-    const [tstz, setTstz] = useState('');
+    // const [tstz, setTstz] = useState('');
     const [quantity, setQuantity] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -49,7 +49,7 @@ function DailyEntry() {
         setTstz('');
         setQuantity('');
         setNotes('');
-        history.push('/testHistory');
+        // history.push('/testHistory');
     }
 
     const handleAddDate = (value) => {
@@ -139,9 +139,7 @@ function DailyEntry() {
                         onChange={handleAddDate}
                         label="DateTimePicker" 
                         variant="outlined" 
-                        renderInput={(params) => {
-                            return <TextField {...params} />;
-                        }}
+                        renderInput={(props) => <TextField {...props} />}
                     />
                     </LocalizationProvider>
 

@@ -78,6 +78,7 @@ function MedList() {
           {prescriptions.map(item => {
             return (
               <ListItem
+                key={item.id}
                 secondaryAction={
                   <IconButton edge="end" aria-label="delete">
                     <DeleteIcon />
@@ -99,7 +100,7 @@ function MedList() {
                 />
 
                 <ListItemText
-                  key={item.id}
+                  
                   primary={item.prescription}
                   dosage={item.dosage}
                   count={item.count}

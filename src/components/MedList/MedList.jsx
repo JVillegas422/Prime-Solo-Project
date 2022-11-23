@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
@@ -26,6 +26,7 @@ import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 function MedList() {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
+  const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((store) => store.user);
@@ -33,11 +34,20 @@ function MedList() {
   console.log('user prescriptions ****', prescriptions);
     
 
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_PRESCRIPTION_LIST'
-        })
-    }, [])
+  useEffect(() => {
+      dispatch({
+          type: 'FETCH_PRESCRIPTION_LIST'
+      })
+  }, [])
+
+  // const onHandleDelete = () => {
+  //   console.log('in onHandleDelete');
+  //   dispatch({
+  //     type: 'DELETE_PRESCRIPTION',
+  //     payload: params.id
+  //   })
+  // }
+
 
   return (
     <>
@@ -82,7 +92,7 @@ function MedList() {
               <ListItem
                 key={item.id}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton edge="end" aria-label="delete" onClick={() => dispatch({ type: 'DELETE_PRESCRIPTION', payload: item.id })} >
                     <DeleteIcon />
                   </IconButton>
                 }
@@ -102,24 +112,32 @@ function MedList() {
                 />
 
                 <ListItemText
-                  primary={item.prescription}
+                  primary={`${item.prescription} : ${item.dosage}`}
                   dosage={item.dosage}
                   count={item.count}
-                  secondary={secondary ? `${item.dosage} : ${item.description}` : null}
+                  secondary={secondary ? `${item.description}` : null}
                 />
+
+                  <Stack direction="row" spacing={1}>
+                    <Chip 
+                      sx={{ bgcolor: '#a0b1ff' }}
+                      icon={<MedicationLiquidIcon />} 
+                      label="Take Medz Now" variant="outlined" 
+                      onClick={() => { history.push('/daily_entry')}}
+                    />
+
+                    <Chip 
+                      sx={{ bgcolor: '#a0b1ff' }}
+                      icon={<MedicationLiquidIcon />} 
+                      label="Edit Prescription" variant="outlined" 
+                      onClick={() => { history.push(`/editMedList/${item.id}`)}}
+                    />
+                  </Stack>
+
                 </ListItem>
               )
             })}
           </List>
-            
-            <Stack direction="row" spacing={1}>
-              <Chip 
-                sx={{ bgcolor: '#a0b1ff' }}
-                icon={<MedicationLiquidIcon />} 
-                label="Take Medz Now" variant="outlined" 
-                onClick={() => { history.push('/daily_entry')}}
-              />
-            </Stack>
 
         </Grid>
       </Box>

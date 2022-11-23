@@ -21,9 +21,42 @@ function* addPrescription(action) {
     }
 }
 
+function* fetchEditPrescription(action) {
+    try {
+        const response = yield axios.get(`/api/prescriptions/${action.payload}`);
+        yield put({ type: 'SET_EDIT_PRESCRIPTIONS', payload: response.data });
+    } catch (error) {
+        console.error('Error in addPrescription', error);
+    }
+}
+
+function* savePrescription(action) {
+    // edit
+    if (action.payload.id) {
+        yield axios.put(`/api/prescriptions/${action.payload.id}`, action.payload);
+    }
+    // add new
+    else {
+        yield axios.post(`/api/prescriptions`, action.payload);
+        yield put({ type: 'FETCH_PRESCRIPTION' });
+    }
+}
+
+function* deletePrescription(action) {
+    try {
+        yield axios.delete(`/api/prescriptions/${action.payload}`);
+        yield put({ type: 'FETCH_PRESCRIPTION_LIST' });
+    } catch (error) {
+        console.error('Error in delete prescription', error);
+    }
+}
+
 function* prescriptionsSaga() {
     yield takeLatest('FETCH_PRESCRIPTION_LIST', fetchPrescriptions);
     yield takeLatest('ADD_PRESCRIPTION', addPrescription);
+    yield takeLatest('FETCH_EDIT_PRESCRIPTIONS', fetchEditPrescription);
+    yield takeLatest('SAVE_PRESCRIPTION', savePrescription);
+    yield takeLatest('DELETE_PRESCRIPTION', deletePrescription);
 
 }
 

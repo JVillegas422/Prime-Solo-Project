@@ -1,4 +1,3 @@
-// import { combineReducers } from 'redux';
 
 const prescriptionsReducer = (state = [], action) => {
     switch (action.type) {

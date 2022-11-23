@@ -27,6 +27,7 @@ import EntryHistory from '../EntryHistory/EntryHistory';
 import EntryHistoryTest from '../EntryHistoryTest/EntryHistoryTest';
 import MedList from '../MedList/MedList';
 import PrescriptionForm from '../PrescriptionForm/PrescriptionForm';
+import MedListEdit from '../MedList/MedListEdit';
 import './App.css';
 
 function App() {
@@ -150,6 +151,13 @@ function App() {
             path="/home"
           >
             <MedList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/editMedList/:id"
+          >
+            <MedListEdit />
           </ProtectedRoute>
 
           <ProtectedRoute

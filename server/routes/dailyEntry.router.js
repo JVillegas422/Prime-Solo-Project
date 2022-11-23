@@ -53,4 +53,40 @@ router.post('/', (req, res) => {
       });
 });
 
+
+// Edit 
+router.put('/:id/edit', (req, res) => {
+  let idToUpdate = req.params.id;
+
+  const sqlQuery = `
+  UPDATE "prescriptions"
+  SET
+    "prescription_name" = $1, 
+    "prescription_amount" = $2, 
+    "addDate" = $3, 
+    "quantity" = $4, 
+    "notes" = $5
+  WHERE
+    "id" = $6;
+  `;
+
+  const sqlValues = [
+    req.body.prescription_name,
+    req.body.prescription_amount,
+    req.body.addDate,
+    req.body.quantity,
+    req.body.notes,
+    idToUpdate
+  ];
+
+  pool.query(sqlQuery, sqlValues)
+      .then((result) => {
+          res.sendStatus(201);
+      })
+      .catch(error => {
+          console.error(`Error making DB query ${sqlQuery}`, error);
+          res.sendStatus(500)
+      });
+});
+
 module.exports = router;

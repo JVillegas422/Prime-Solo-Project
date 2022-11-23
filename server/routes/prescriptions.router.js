@@ -53,24 +53,58 @@ router.post('/', (req, res) => {
         });
   });
 
-  // router.get('/:id', (req, res) => {
+  // GET single item
+  router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    // Get all of the prescriptions in the table
+    const sqlText = `
+        SELECT * FROM "prescriptions" 
+        WHERE id = $1
+        ORDER BY id ASC;
+    `;
+    const sqlParams = [id]; // $1 = req.params.id
 
-//   const sqlQuery = `
-//   SELECT * FROM daily_entry
-//   WHERE id = $1;
-//   `;
+    pool.query(sqlText, sqlParams)
+        .then((result) => {
+            res.send(result.rows[0]);   
+        })
+        .catch((error) => {
+            console.log(`Error making database query ${sqlText}`, error);
+            res.sendStatus(500);
+        });
+});
 
-//   const sqlParams = [id];
+// Edit 
+router.put('/:id', (req, res) => {
+  let idToUpdate = req.params.id;
 
-//   pool.query(sqlQuery, sqlParams)
-//       .then(result => {
-//           res.send(result.rows[0]);
-//       })
-//       .catch(error => {
-//           console.log('error in get request', error)
-//           res.sendStatus(500);
-//       })
+  const sqlQuery = `
+  UPDATE "prescriptions"
+  SET
+    "prescription" = $1, 
+    "description" = $2, 
+    "dosage" = $3, 
+    "count" = $4 
+  WHERE
+    "id" = $5;
+  `;
 
-// })
+  const sqlValues = [
+    req.body.prescription,
+    req.body.description,
+    req.body.dosage,
+    req.body.count,
+    idToUpdate
+  ];
+
+  pool.query(sqlQuery, sqlValues)
+      .then((result) => {
+          res.sendStatus(201);
+      })
+      .catch(error => {
+          console.error(`Error making DB query ${sqlQuery}`, error);
+          res.sendStatus(500)
+      });
+});
   
   module.exports = router;

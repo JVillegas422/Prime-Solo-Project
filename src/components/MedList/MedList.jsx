@@ -102,24 +102,32 @@ function MedList() {
                 />
 
                 <ListItemText
-                  primary={item.prescription}
+                  primary={`${item.prescription} : ${item.dosage}`}
                   dosage={item.dosage}
                   count={item.count}
-                  secondary={secondary ? `${item.dosage} : ${item.description}` : null}
+                  secondary={secondary ? `${item.description}` : null}
                 />
+
+                  <Stack direction="row" spacing={1}>
+                    <Chip 
+                      sx={{ bgcolor: '#a0b1ff' }}
+                      icon={<MedicationLiquidIcon />} 
+                      label="Take Medz Now" variant="outlined" 
+                      onClick={() => { history.push('/daily_entry')}}
+                    />
+
+                    <Chip 
+                      sx={{ bgcolor: '#a0b1ff' }}
+                      icon={<MedicationLiquidIcon />} 
+                      label="Edit Prescription" variant="outlined" 
+                      onClick={() => { history.push(`/editMedList/${item.id}`)}}
+                    />
+                  </Stack>
+
                 </ListItem>
               )
             })}
           </List>
-            
-            <Stack direction="row" spacing={1}>
-              <Chip 
-                sx={{ bgcolor: '#a0b1ff' }}
-                icon={<MedicationLiquidIcon />} 
-                label="Take Medz Now" variant="outlined" 
-                onClick={() => { history.push('/daily_entry')}}
-              />
-            </Stack>
 
         </Grid>
       </Box>

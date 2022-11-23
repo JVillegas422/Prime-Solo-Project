@@ -9,18 +9,29 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
+import dateFormat from 'dateformat';
 
 // Material-UI imports
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+
 
 function DailyEntry() {
     console.log('in DailyEntry');
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [addDate, setAddDate] = useState(dayjs('').format("dddd, MMMM D, YYYY, h:mm A"));
+    const [addDate, setAddDate] = useState('');
+    // const dayjs = require('dayjs');
+    // var moment = require('moment-timezone');
+    // var localizedFormat = require('dayjs/plugin/localizedFormat')
+    // dayjs.extend(localizedFormat)
+    var utc = require('dayjs/plugin/utc')
+    dayjs.extend(utc)
+    var localizedFormat = require('dayjs/plugin/localizedFormat')
+    dayjs.extend(localizedFormat)
 
     const [prescription_name, setPrescription_Name] = useState('');
     const [prescription_amount, setPrescription_Amount] = useState('');
@@ -28,7 +39,7 @@ function DailyEntry() {
     const [notes, setNotes] = useState('');
 
     const addNewEntry = () => {
-        console.log('in handleClick');
+        console.log('in handleClick',addDate);
         const newEntry = {
             prescription_name: prescription_name,
             prescription_amount: prescription_amount,
@@ -126,23 +137,13 @@ function DailyEntry() {
                         }}
                         label="DateTimePicker"
                         variant="outlined"
-                        value={addDate}
+                        // value={dayjs(addDate).format('L LT')}
+                        inputFormat="YYYY/MM/DD hh:mm a"
+                        value={dayjs(addDate).format('L LT')}
                         fullWidth
                         onChange={handleAddDate}
                     />
                     </LocalizationProvider>
-
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
-                    <DatePicker
-                        disableFuture
-                        label="Responsive"
-                        openTo="year"
-                        views={['year', 'month', 'day']}
-                        addDate={(value => setAddDate(value))}
-                        onChange={handleAddDate}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider> */}
 
                 <TextField
                     required

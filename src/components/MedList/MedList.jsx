@@ -9,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
-import MedicationIcon from '@mui/icons-material/Medication';
 import MedicationTwoToneIcon from '@mui/icons-material/MedicationTwoTone';
 import IconButton from '@mui/material/IconButton';
 import FormGroup from '@mui/material/FormGroup';
@@ -23,14 +22,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
+import Fab from '@mui/material/Fab';
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
 
 function MedList() {
   const [dense, setDense] = React.useState(false);
@@ -50,12 +43,11 @@ function MedList() {
 
   return (
     <>
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
         
-        <div className="container">
-            <h2>Welcome, {user.username}!</h2>
-            
-        </div>
+      <div className="container">
+        <h2>Welcome, {user.username}!</h2>     
+      </div>
 
       <FormGroup row>
         <FormControlLabel
@@ -82,101 +74,53 @@ function MedList() {
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             My Prescription List
           </Typography>
-            <List dense={dense}>
-              {generate(
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: "#1976d2" }}>
-                      <MedicationTwoToneIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Medication List"
-                    secondary={secondary ? 'See prescription information right here!' : null}
-                  />
-                </ListItem>,
-              )}
-              <h3>Prescription List</h3>
-              <table>
-                    <thead>
-                        <tr>
-                            <th>Prescription Name</th>
-                            <th>Dosage</th>
-                            <th>Count</th>
-                            <th>Description</th>
-                        </tr>
-                        
-                        {prescriptions.map(item => {
-                            return (
-                                <tr key={item.id}>
-                                    <td>
-                                        {item.prescription}
-                                    </td>
+          <List dense={dense}>  
+          {prescriptions.map(item => {
+            return (
+              <ListItem
+                secondaryAction={
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar 
+                    sx={{ bgcolor: "#1976d2" }}
+                  >
+                    <MedicationTwoToneIcon />
+                  </Avatar>
+                </ListItemAvatar>
 
-                                    <td>
-                                        {item.dosage}
-                                    </td>
+                <Chip 
+                  sx={{ m: 2, height: 35 }}
+                  color="primary" 
+                  label={item.count}
+                />
 
-                                    <td>
-                                        {item.count}
-                                    </td>
-
-                                    <td>
-                                        {item.description}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </thead>
-                </table>
-            </List>
+                <ListItemText
+                  key={item.id}
+                  primary={item.prescription}
+                  dosage={item.dosage}
+                  count={item.count}
+                  secondary={secondary ? `${item.dosage} : ${item.description}` : null}
+                />
+                </ListItem>
+              )
+            })}
+          </List>
+            
             <Stack direction="row" spacing={1}>
-                <Chip icon={<MedicationLiquidIcon />} label="Take Medz Now" variant="outlined" onClick={() => { history.push('/daily_entry')}}/>
+              <Chip 
+                icon={<MedicationLiquidIcon />} 
+                label="Take Medz Now" variant="outlined" 
+                onClick={() => { history.push('/daily_entry')}}
+              />
             </Stack>
+
         </Grid>
+      </Box>
 
-        {/* <Stack direction="row" spacing={1}>
-            <Chip icon={<MedicationLiquidIcon />} label="Take Medz Now" variant="outlined" />
-        </Stack> */}
-    </Box>
-    {/* <table>
-                    <thead>
-                        <tr>
-                            <th>Prescription Name</th>
-                            <th>Dosage</th>
-                            <th>Count</th>
-                            <th>Description</th>
-                        </tr>
-                        
-                        {prescriptions.map(prescription => {
-                            return (
-                                <tr key={prescription.id}>
-                                    <td>
-                                        {prescription.prescription}
-                                    </td>
-
-                                    <td>
-                                        {prescription.dosage}
-                                    </td>
-
-                                    <td>
-                                        {prescription.count}
-                                    </td>
-
-                                    <td>
-                                        {prescription.description}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </thead>
-                </table> */}
     </>
   );
 }

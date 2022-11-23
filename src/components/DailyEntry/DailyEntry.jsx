@@ -13,15 +13,14 @@ import Chip from '@mui/material/Chip';
 // Material-UI imports
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 function DailyEntry() {
     console.log('in DailyEntry');
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [addDate, setAddDate] = useState(dayjs().format());
+    const [addDate, setAddDate] = useState(dayjs('').format("dddd, MMMM D, YYYY, h:mm A"));
 
     const [prescription_name, setPrescription_Name] = useState('');
     const [prescription_amount, setPrescription_Amount] = useState('');
@@ -122,12 +121,14 @@ function DailyEntry() {
 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DateTimePicker
-                        renderInput={(props) => <TextField {...props} />}
-                        label="DateTimePicker"
-                        value={addDate}
-                        onChange={(newAddDate) => {
-                            handleAddDate(newAddDate);
+                        renderInput={(params) => {
+                            return <TextField {...params} />;
                         }}
+                        label="DateTimePicker"
+                        variant="outlined"
+                        value={addDate}
+                        fullWidth
+                        onChange={handleAddDate}
                     />
                     </LocalizationProvider>
 

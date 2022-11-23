@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
@@ -22,7 +21,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
-import Fab from '@mui/material/Fab';
 
 
 function MedList() {
@@ -43,7 +41,11 @@ function MedList() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      <Box 
+      sx={{ 
+        flexGrow: 1, maxWidth: 752, 
+        bgcolor: '#a0b1ff'
+      }}>
         
       <div className="container">
         <h2>Welcome, {user.username}!</h2>     
@@ -70,7 +72,7 @@ function MedList() {
         />
       </FormGroup>
       
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} bgcolor='#c7ddf6'>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             My Prescription List
           </Typography>
@@ -94,13 +96,12 @@ function MedList() {
                 </ListItemAvatar>
 
                 <Chip 
-                  sx={{ m: 2, height: 35 }}
+                  sx={{ m: 2, height: 40 }}
                   color="primary" 
                   label={item.count}
                 />
 
                 <ListItemText
-                  
                   primary={item.prescription}
                   dosage={item.dosage}
                   count={item.count}
@@ -113,6 +114,7 @@ function MedList() {
             
             <Stack direction="row" spacing={1}>
               <Chip 
+                sx={{ bgcolor: '#a0b1ff' }}
                 icon={<MedicationLiquidIcon />} 
                 label="Take Medz Now" variant="outlined" 
                 onClick={() => { history.push('/daily_entry')}}

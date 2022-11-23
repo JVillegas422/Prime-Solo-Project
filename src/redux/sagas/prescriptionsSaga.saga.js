@@ -42,11 +42,21 @@ function* savePrescription(action) {
     }
 }
 
+function* deletePrescription(action) {
+    try {
+        yield axios.delete(`/api/prescriptions/${action.payload}`);
+        yield put({ type: 'FETCH_PRESCRIPTION_LIST' });
+    } catch (error) {
+        console.error('Error in delete prescription', error);
+    }
+}
+
 function* prescriptionsSaga() {
     yield takeLatest('FETCH_PRESCRIPTION_LIST', fetchPrescriptions);
     yield takeLatest('ADD_PRESCRIPTION', addPrescription);
     yield takeLatest('FETCH_EDIT_PRESCRIPTIONS', fetchEditPrescription);
     yield takeLatest('SAVE_PRESCRIPTION', savePrescription);
+    yield takeLatest('DELETE_PRESCRIPTION', deletePrescription);
 
 }
 

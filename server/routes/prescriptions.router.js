@@ -106,5 +106,26 @@ router.put('/:id', (req, res) => {
           res.sendStatus(500)
       });
 });
-  
-  module.exports = router;
+
+// Delete
+router.delete('/:id', (req, res) => {
+  let user_id = req.user.id;
+  let idToDelete = req.params.id;
+
+  const queryText = `
+    DELETE FROM "prescriptions" 
+    WHERE "id" = $1 AND "user_id" = $2;
+  `;
+
+  pool.query(queryText, [idToDelete, user_id])
+      .then(() => {
+          res.sendStatus(200);
+      })
+      .catch((err) => {
+          console.log('Error in delete', err);
+          res.sendStatus(500);
+      });
+});
+
+
+module.exports = router;

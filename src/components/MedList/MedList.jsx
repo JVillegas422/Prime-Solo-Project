@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
@@ -26,6 +26,7 @@ import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 function MedList() {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
+  const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((store) => store.user);
@@ -33,11 +34,20 @@ function MedList() {
   console.log('user prescriptions ****', prescriptions);
     
 
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_PRESCRIPTION_LIST'
-        })
-    }, [])
+  useEffect(() => {
+      dispatch({
+          type: 'FETCH_PRESCRIPTION_LIST'
+      })
+  }, [])
+
+  // const onHandleDelete = () => {
+  //   console.log('in onHandleDelete');
+  //   dispatch({
+  //     type: 'DELETE_PRESCRIPTION',
+  //     payload: params.id
+  //   })
+  // }
+
 
   return (
     <>
@@ -82,7 +92,7 @@ function MedList() {
               <ListItem
                 key={item.id}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton edge="end" aria-label="delete" onClick={() => dispatch({ type: 'DELETE_PRESCRIPTION', payload: item.id })} >
                     <DeleteIcon />
                   </IconButton>
                 }

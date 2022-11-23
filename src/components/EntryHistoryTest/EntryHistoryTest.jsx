@@ -346,7 +346,7 @@ function EntryHistoryTest() {
                       </TableCell>
                       {/* <TableCell align="right">{row.prescription_name}</TableCell> */}
                       <TableCell align="right">{row.prescription_amount}</TableCell>
-                      <TableCell align="right">{row.addDate}</TableCell>
+                      <TableCell align="right">{new Date(row.addDate).toLocaleString()}</TableCell>
                       <TableCell align="right">{row.quantity}</TableCell>
                       <TableCell align="right">{row.notes}</TableCell>
                     </TableRow>

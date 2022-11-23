@@ -21,12 +21,10 @@ function DailyEntry() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    // const [newEntry, setNewEntry] = useState({});
-    const [tstz, setTstz] = useState(dayjs('2022-11-22'));
+    const [addDate, setAddDate] = useState(dayjs().format());
 
     const [prescription_name, setPrescription_Name] = useState('');
     const [prescription_amount, setPrescription_Amount] = useState('');
-    // const [tstz, setTstz] = useState('');
     const [quantity, setQuantity] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -35,7 +33,7 @@ function DailyEntry() {
         const newEntry = {
             prescription_name: prescription_name,
             prescription_amount: prescription_amount,
-            tstz: tstz,
+            addDate: addDate,
             quantity: quantity,
             notes: notes,
         }
@@ -46,7 +44,7 @@ function DailyEntry() {
         // clear inputs
         setPrescription_Name('');
         setPrescription_Amount('');
-        setTstz('');
+        setAddDate('');
         setQuantity('');
         setNotes('');
         // history.push('/testHistory');
@@ -54,7 +52,7 @@ function DailyEntry() {
 
     const handleAddDate = (value) => {
         console.log('in handleAddDate Value is:', value.$d)
-        setTstz(value);
+        setAddDate(value);
     } 
 
     // const onHandleNewEntry = (evt) => {
@@ -87,7 +85,6 @@ function DailyEntry() {
                 }}
                 noValidate
                 autoComplete="off"
-                // onSubmit={(event) => addNewEntry(event)}
             >
                 <FormControl
                     sx= {{ bgcolor: 'grey.400'}}
@@ -112,16 +109,6 @@ function DailyEntry() {
                     value={prescription_amount}
                 />
 
-                {/* <TextField
-                    required
-                    id="filled-required"
-                    label="Time"
-                    placeholder="Time"
-                    variant="filled"
-                    onChange={onHandleNewEntry}
-                    name="tstz"
-                /> */}
-
                 {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateTimePicker
                         renderInput={(props) => <TextField {...props} />}
@@ -133,15 +120,28 @@ function DailyEntry() {
                     />
                     </LocalizationProvider> */}
 
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DateTimePicker
-                        value={tstz}
-                        onChange={handleAddDate}
-                        label="DateTimePicker" 
-                        variant="outlined" 
                         renderInput={(props) => <TextField {...props} />}
+                        label="DateTimePicker"
+                        value={addDate}
+                        onChange={(newAddDate) => {
+                            handleAddDate(newAddDate);
+                        }}
                     />
                     </LocalizationProvider>
+
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+                    <DatePicker
+                        disableFuture
+                        label="Responsive"
+                        openTo="year"
+                        views={['year', 'month', 'day']}
+                        addDate={(value => setAddDate(value))}
+                        onChange={handleAddDate}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider> */}
 
                 <TextField
                     required

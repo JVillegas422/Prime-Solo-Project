@@ -236,11 +236,11 @@ function EntryHistoryTest() {
 
   // ---
 
-  function createData(prescription_name, prescription_amount, tstz, quantity, notes) {
+  function createData(prescription_name, prescription_amount, addDate, quantity, notes) {
     return {
       prescription_name,
       prescription_amount,
-      tstz,
+      addDate,
       quantity,
       notes,
     };
@@ -371,7 +371,7 @@ function EntryHistoryTest() {
                       </TableCell>
                       {/* <TableCell align="right">{row.prescription_name}</TableCell> */}
                       <TableCell align="right">{row.prescription_amount}</TableCell>
-                      <TableCell align="right">{row.tstz}</TableCell>
+                      <TableCell align="right">{row.addDate}</TableCell>
                       <TableCell align="right">{row.quantity}</TableCell>
                       <TableCell align="right">{row.notes}</TableCell>
                     </TableRow>

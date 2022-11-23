@@ -43,7 +43,7 @@ function EntryHistory() {
                                     </td>
 
                                     <td>
-                                        {entry.tstz}
+                                        {entry.addDate}
                                     </td>
 
                                     <td>

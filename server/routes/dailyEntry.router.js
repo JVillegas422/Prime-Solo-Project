@@ -9,9 +9,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlParams = [user_id];
 
     const sqlQuery = `
-        SELECT "id", "prescription_name", "prescription_amount", "tstz", "quantity", "notes" FROM "daily_entry"
-        WHERE "user_id" = $1
-        ORDER BY "tstz";
+        SELECT "id", "prescription_name", "prescription_amount", "addDate", "quantity", "notes" FROM "daily_entry"
+        WHERE "user_id" = $1;    
     `;
 
     pool.query(sqlQuery, sqlParams)
@@ -30,7 +29,7 @@ router.post('/', (req, res) => {
 
   const sqlQuery = `
   INSERT INTO "daily_entry" 
-    ("user_id", "prescription_name", "prescription_amount", "tstz", "quantity", "notes")
+    ("user_id", "prescription_name", "prescription_amount", "addDate", "quantity", "notes")
   VALUES 
     ($1, $2, $3, $4, $5, $6);
   `;
@@ -39,7 +38,7 @@ router.post('/', (req, res) => {
     user_id,
     newEntry.prescription_name,
     newEntry.prescription_amount,
-    newEntry.tstz,
+    newEntry.addDate,
     newEntry.quantity,
     newEntry.notes,
   ];

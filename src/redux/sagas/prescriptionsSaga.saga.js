@@ -26,7 +26,7 @@ function* fetchEditPrescription(action) {
         const response = yield axios.get(`/api/prescriptions/${action.payload}`);
         yield put({ type: 'SET_EDIT_PRESCRIPTIONS', payload: response.data });
     } catch (error) {
-        console.error('Error in addPrescription', error);
+        console.error('Error in fetchEditPrescription', error);
     }
 }
 

@@ -54,18 +54,40 @@ router.post('/', (req, res) => {
 });
 
 
+  // GET single item
+  router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    // Get all of the prescriptions in the table
+    const sqlText = `
+        SELECT * FROM "daily_entry" 
+        WHERE id = $1
+        ORDER BY id ASC;
+    `;
+    const sqlParams = [id]; // $1 = req.params.id
+
+    pool.query(sqlText, sqlParams)
+        .then((result) => {
+            res.send(result.rows[0]);   
+        })
+        .catch((error) => {
+            console.log(`Error making database query ${sqlText}`, error);
+            res.sendStatus(500);
+        });
+});
+
+
 // Edit 
 router.put('/:id/edit', (req, res) => {
   let idToUpdate = req.params.id;
 
   const sqlQuery = `
-  UPDATE "prescriptions"
-  SET
-    "prescription_name" = $1, 
-    "prescription_amount" = $2, 
-    "addDate" = $3, 
-    "quantity" = $4, 
-    "notes" = $5
+  UPDATE "daily_entry"
+  SET 
+  "prescription_name" = $1, 
+  "prescription_amount" = $2, 
+  "addDate" = $3,
+  "quantity" = $4,
+  "notes" = $5
   WHERE
     "id" = $6;
   `;
@@ -86,6 +108,26 @@ router.put('/:id/edit', (req, res) => {
       .catch(error => {
           console.error(`Error making DB query ${sqlQuery}`, error);
           res.sendStatus(500)
+      });
+});
+
+// Delete
+router.delete('/:id', (req, res) => {
+  let user_id = req.user.id;
+  let idToDelete = req.params.id;
+
+  const queryText = `
+    DELETE FROM "daily_entry" 
+    WHERE "id" = $1 AND "user_id" = $2;
+  `;
+
+  pool.query(queryText, [idToDelete, user_id])
+      .then(() => {
+          res.sendStatus(200);
+      })
+      .catch((err) => {
+          console.log('Error in delete', err);
+          res.sendStatus(500);
       });
 });
 

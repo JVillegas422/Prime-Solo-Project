@@ -70,19 +70,19 @@ const headCells = [
     label: 'Dosage',
   },
   {
-    id: 'fat',
+    id: 'addDate',
     numeric: true,
     disablePadding: false,
     label: 'Time Taken ',
   },
   {
-    id: 'carbs',
+    id: 'quantity',
     numeric: true,
     disablePadding: false,
-    label: 'Quantity ',
+    label: 'Quantity Taken ',
   },
   {
-    id: 'protein',
+    id: 'notes ',
     numeric: true,
     disablePadding: false,
     label: 'Notes ',
@@ -106,7 +106,7 @@ function EnhancedTableHead(props) {
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              'aria-label': 'select all desserts',
+              'aria-label': 'select all prescriptions',
             }}
           />
         </TableCell>
@@ -147,6 +147,24 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  const rows = useSelector(store => store.dailyEntryReducer);
+  const dispatch = useDispatch();
+  const itemSelected = rows.map((item) => item.prescription_name);
+  console.log('PROPS', props);
+
+  
+  // if (numSelected === itemSelected) {
+  //   setNewSelected(newSelected);
+  //     return;
+  // }
+  // setNewSelected;
+
+  // const clickDelete = (event) => {
+  //   if (numSelected === itemSelected) {
+  //     setNewSelected(newSelected);
+  //       return;
+  //   }
+  // };
 
   return (
     <Toolbar
@@ -181,7 +199,7 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={() => dispatch({ type: 'DELETE_ENTRY', payload: numSelected })}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -202,7 +220,7 @@ EnhancedTableToolbar.propTypes = {
 
 function EntryHistoryTest() {
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('dosage');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -211,15 +229,15 @@ function EntryHistoryTest() {
 
   // ---
 
-  function createData(prescription_name, prescription_amount, addDate, quantity, notes) {
-    return {
-      prescription_name,
-      prescription_amount,
-      addDate,
-      quantity,
-      notes,
-    };
-  }
+  // function createData(prescription_name, prescription_amount, addDate, quantity, notes) {
+  //   return {
+  //     prescription_name,
+  //     prescription_amount,
+  //     addDate,
+  //     quantity,
+  //     notes,
+  //   };
+  // }
 
   console.log('in EntryHistory');
 
@@ -244,19 +262,19 @@ function EntryHistoryTest() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.prescription_name);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, prescription_name) => {
+    const selectedIndex = selected.indexOf(prescription_name);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, prescription_name);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -284,7 +302,16 @@ function EntryHistoryTest() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+//   const onHandleDelete = (evt) => {
+//     evt.preventDefault();
+//     dispatch({
+//         type: 'DELETE_ENTRY',
+//         payload: editPrescriptions
+//     })
+//     history.push('/home');
+// }
+
+  const isSelected = (prescription_name) => selected.indexOf(prescription_name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -314,13 +341,13 @@ function EntryHistoryTest() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.index);
+                  const isItemSelected = isSelected(row.prescription_name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row)}
+                      onClick={(event) => handleClick(event, row.prescription_name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}

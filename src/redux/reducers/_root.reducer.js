@@ -5,6 +5,7 @@ import searchReducer from './searchReducer.reducer';
 import dailyEntryReducer from './dailyEntryReducer.reducer';
 import prescriptionsReducer from './prescriptionsReducer.reducer';
 import editPrescriptions from './editPrescription.reducer';
+import editEntry from './editEntry.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   searchReducer,
   dailyEntryReducer,
   prescriptionsReducer,
-  editPrescriptions
+  editPrescriptions,
+  editEntry
 });
 
 export default rootReducer;

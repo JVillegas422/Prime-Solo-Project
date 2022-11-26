@@ -29,23 +29,6 @@ function MedListEdit() {
     }, [params.id]);
     // 👆 re-run the fn every time the :id changes
 
-
-    // useEffect(() => {
-    //     getPrescriptions();
-    // }, [params.id]);
-
-    // const getPrescriptions = () => {
-    //     dispatch({
-    //         type: 'FETCH_EDIT_PRESCRIPTIONS',
-    //         payload: params.id
-    //     })
-    //     return () => {
-    //         dispatch({
-    //             type: 'CLEAR_EDIT_PRESCRIPTIONS'
-    //         })
-    //     }
-    // }
-
     const onSubmit = (evt) => {
         evt.preventDefault();
         dispatch({
@@ -55,25 +38,12 @@ function MedListEdit() {
         history.push('/home');
     }
 
-    // const onHandleNewEntry = (evt) => {
-    //     setUpdateEntry({ ...newEntry, [evt.target.name]: evt.target.value })
-    // }
-
-    //  const getPrescriptions = () => {
-    //     dispatch({
-    //         type: 'ADD_NEW_ENTRY',
-    //         payload: newEntry
-    //     })
-    //     console.log('here is a newEntry', newEntry);
-    //     history.push('/testHistory');
-    // }
-
     return (
         <>
             <h3>MedList Edit page</h3>
 
         <Typography variant='h3' mt={2} sx={{ p: 3 }}>
-                Add New Prescription Form
+                Edit Prescription Form
             </Typography>     
 
             <Box 
@@ -81,16 +51,14 @@ function MedListEdit() {
                 component="form" 
                 mx={'auto'}
                 sx={{ 
-                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' ,bgcolor: 'white',  },
+                    '& .MuiTextField-root': { p: 6, width: '22rem', height: '7rem' , bgcolor: 'white',  },
                     color: 'text.primary'
                 }}
                 noValidate
                 autoComplete="off"
-                // onSubmit={(event) => addPrescription(event)}
                 onSubmit={onSubmit}
             >
                 <FormControl
-                    sx= {{ bgcolor: 'grey.400'}}
                 >
                 <TextField
                     label="Prescription"
@@ -101,9 +69,12 @@ function MedListEdit() {
                 />
 
                 <TextField
+                    id="filled-multiline-flexiable"
                     label="Description"
                     placeholder="Description"
                     variant="filled"
+                    multiline
+                    maxRows={8}
                     value={editPrescriptions.description}
                     onChange={(evt) => dispatch({ type: 'EDIT_PRESCRIPTION_DETAILS', payload: {description: evt.target.value} })}
                 />
@@ -112,11 +83,14 @@ function MedListEdit() {
                     label="Dosage"
                     placeholder="Dosage"
                     variant="filled"
+                    sx={{ mt: 16 }}
                     value={editPrescriptions.dosage}
                     onChange={(evt) => dispatch({ type: 'EDIT_PRESCRIPTION_DETAILS', payload: {dosage: evt.target.value }})}
                 />
 
                 <TextField
+                    id="standard-number"
+                    type="number"
                     label="Count"
                     placeholder="Count"
                     variant="filled"
@@ -130,7 +104,7 @@ function MedListEdit() {
                     sx={{ p: 2 }}
                     
                 >
-                    Save Update
+                    Save Edit
                 </Button>
                 </FormControl>
                 

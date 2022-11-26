@@ -40,14 +40,6 @@ function MedList() {
       })
   }, [])
 
-  // const onHandleDelete = () => {
-  //   console.log('in onHandleDelete');
-  //   dispatch({
-  //     type: 'DELETE_PRESCRIPTION',
-  //     payload: params.id
-  //   })
-  // }
-
 
   return (
     <>

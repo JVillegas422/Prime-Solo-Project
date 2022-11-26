@@ -15,7 +15,6 @@ import dateFormat from 'dateformat';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
-// import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 
 function DailyEntry() {
@@ -24,10 +23,6 @@ function DailyEntry() {
     const dispatch = useDispatch();
     const history = useHistory();
     const [addDate, setAddDate] = useState('');
-    // const dayjs = require('dayjs');
-    // var moment = require('moment-timezone');
-    // var localizedFormat = require('dayjs/plugin/localizedFormat')
-    // dayjs.extend(localizedFormat)
     var utc = require('dayjs/plugin/utc')
     dayjs.extend(utc)
     var localizedFormat = require('dayjs/plugin/localizedFormat')
@@ -65,20 +60,6 @@ function DailyEntry() {
         setAddDate(value);
     } 
 
-    // const onHandleNewEntry = (evt) => {
-    //     setNewEntry({ ...newEntry, [evt.target.name]: evt.target.value })
-    // }
-
-    //  const addNewEntry = (evt) => {
-    //     evt.preventDefault();
-    //     dispatch({
-    //         type: 'ADD_NEW_ENTRY',
-    //         payload: newEntry
-    //     })
-    //     console.log('here is a newEntry', newEntry);
-    //     history.push('/testHistory');
-    // }
-
     return (
         <>
             <Typography variant='h3' mt={2} sx={{ p: 3 }}>
@@ -102,8 +83,8 @@ function DailyEntry() {
                 <TextField
                     required
                     id="filled-required"
-                    label="Prescription Name"
-                    placeholder="Prescription Name"
+                    label="Prescription"
+                    placeholder="Prescription"
                     variant="filled"
                     onChange={(event) => setPrescription_Name(event.target.value)}
                     value={prescription_name}
@@ -112,23 +93,12 @@ function DailyEntry() {
                 <TextField
                     required
                     id="filled-required"
-                    label="Prescription Amount"
-                    placeholder="Prescription Amount"
+                    label="Dosage"
+                    placeholder="Dosage"
                     variant="filled"
                     onChange={(event) => setPrescription_Amount(event.target.value)}
                     value={prescription_amount}
                 />
-
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker
-                        renderInput={(props) => <TextField {...props} />}
-                        label="DateTimePicker"
-                        value={value}
-                        onChange={(newValue) => {
-                        setValue(newValue);
-                        }}
-                    />
-                    </LocalizationProvider> */}
 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DateTimePicker
@@ -147,20 +117,25 @@ function DailyEntry() {
 
                 <TextField
                     required
-                    id="filled-required"
+                    id="standard-number"
+                    type="number"
                     label="Quantity"
-                    placeholder="Quantity"
                     variant="filled"
                     onChange={(event) => setQuantity(event.target.value)}
                     value={quantity}
+                    InputLabelProps={{
+                        shrink: true,
+                      }}
                 />
 
                 <TextField
                     required
-                    id="filled-required"
+                    id="outlined-multiline-flexible"
                     label="Notes"
                     placeholder="Notes"
                     variant="filled"
+                    multiline
+                    maxRows={4}
                     onChange={(event) => setNotes(event.target.value)}
                     value={notes}
                 />

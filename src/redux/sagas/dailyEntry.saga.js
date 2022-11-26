@@ -24,22 +24,43 @@ function* fetchEntryHistory() {
         
 }
 
-// function* fetchNewEntry(action) {
-//     // Get user prescriptions from database by id
-//     try {
-//         const prescriptionId = action.payload;
-//         const userPrescription = yield axios.get(`/api/prescriptions/${prescriptionId}`);
-//         yield put({ type: 'SET_NEW_ENTRY', payload: userPrescription.data });
-//     } catch (error) {
-//         console.log('Error in set movie details', error);
-//     }
-// }
+function* fetchEditEntry(action) {
+    try {
+        const response = yield axios.get(`/api/daily_entry/${action.payload}`);
+        yield put({ type: 'SET_EDIT_ENTRY', payload: response.data });
+    } catch (error) {
+        console.error('Error in fetchEditEntry', error);
+    }
+}
+
+function* saveEntry(action) {
+    // edit
+    if (action.payload.id) {
+        yield axios.put(`/api/daily_entry/${action.payload.id}`, action.payload);
+    }
+    // add new
+    else {
+        yield axios.post(`/api/daily_entry`, action.payload);
+        yield put({ type: 'FETCH_NEW_ENTRY' });
+    }
+}
+
+function* deleteEntry(action) {
+    try {
+        yield axios.delete(`/api/daily_entry/${action.payload}`);
+        yield put({ type: 'FETCH_ENTRY_HISTORY' });
+    } catch (error) {
+        console.error('Error in delete prescription', error);
+    }
+}
 
 
 function* dailyEntry() {
     yield takeLatest('ADD_NEW_ENTRY', addNewEntry);
     yield takeLatest('FETCH_ENTRY_HISTORY', fetchEntryHistory);
-    // yield takeLatest('FETCH_ENTRY', fetchNewEntry);
+    yield takeLatest('FETCH_EDIT_ENTRY', fetchEditEntry);
+    yield takeLatest('SAVE_ENTRY', saveEntry);
+    yield takeLatest('DELETE_ENTRY', deleteEntry);
 
 }
 

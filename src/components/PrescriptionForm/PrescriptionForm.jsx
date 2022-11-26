@@ -85,10 +85,12 @@ function PrescriptionForm() {
 
                 <TextField
                     required
-                    id="filled-required"
+                    id="outlined-multiline-flexible"
                     label="Description"
                     placeholder="Description"
                     variant="filled"
+                    multiline
+                    maxRows={4}
                     onChange={onHandlePrescription}
                     name="description"
                 />

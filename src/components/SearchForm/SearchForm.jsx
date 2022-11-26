@@ -18,6 +18,7 @@ function SearchForm() {
     const [searchParams, setSearchParams] = useState('');
     const results = useSelector(store => store.searchReducer);
     const searchResults = results.searchList;
+    console.log('searchResults', searchResults);
 
     let newArr = [];
     searchResults.forEach((searchResult) => {
@@ -64,8 +65,8 @@ function SearchForm() {
           
             {/* <ul>
                 {newArr.map(items => (items.map(nameItem => (
-                    <li key={nameItem}>
-                        {nameItem}
+                    <li key={nameItem.id}>
+                        Prescription Name: {nameItem.brand_name} Product Number: {nameItem.product_number} Dosage Form: {nameItem.dosage_form} Route: {nameItem.route}
                     </li>
                 ))))} 
             </ul> */}
@@ -75,10 +76,13 @@ function SearchForm() {
              */}
 
             <TableContainer component={Paper}>
-                <Table sx={{ maxWidth: 750 }} aria-label="simple table">
+                <Table sx={{ minWidth: 750 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Prescription Name</TableCell>
+                            <TableCell>Product Number</TableCell>
+                            <TableCell>Dosage Form</TableCell>
+                            <TableCell>Route</TableCell>
                             <TableCell align="right">Add Button</TableCell>
                         </TableRow>
                     </TableHead>
@@ -89,7 +93,19 @@ function SearchForm() {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {itemName}
+                                {itemName.brand_name}
+                            </TableCell>
+
+                            <TableCell component="th" scope="row">
+                                {itemName.product_number}
+                            </TableCell>
+
+                            <TableCell component="th" scope="row">
+                                {itemName.dosage_form}
+                            </TableCell>
+
+                            <TableCell component="th" scope="row">
+                                {itemName.route}
                             </TableCell>
                         
                             <TableCell align="right">

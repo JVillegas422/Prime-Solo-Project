@@ -16,6 +16,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+
 
 // MUI Chip
 import Chip from '@mui/material/Chip';
@@ -45,7 +47,7 @@ function MedList() {
     <>
       <Box 
       sx={{ 
-        flexGrow: 1, maxWidth: 752, 
+        flexGrow: 2, maxWidth: 850, 
         bgcolor: '#a0b1ff'
       }}>
         
@@ -120,7 +122,7 @@ function MedList() {
 
                     <Chip 
                       sx={{ bgcolor: '#a0b1ff' }}
-                      icon={<MedicationLiquidIcon />} 
+                      icon={<EditTwoToneIcon />} 
                       label="Edit Prescription" variant="outlined" 
                       onClick={() => { history.push(`/editMedList/${item.id}`)}}
                     />

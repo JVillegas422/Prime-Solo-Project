@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import './MedList.css';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,6 +18,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+
+import Paper from '@mui/material/Paper';
 
 
 // MUI Chip
@@ -46,16 +49,22 @@ function MedList() {
   return (
     <>
       <Box 
-      sx={{ 
-        flexGrow: 2, maxWidth: 850, 
-        bgcolor: '#a0b1ff'
-      }}>
+        sx={{ 
+          flexGrow: 2, 
+          maxWidth: 940, 
+          bgcolor: '#a0b1ff',
+          borderRadius: 5
+        }}
+      >
         
-      <div className="container">
+      {/* <div className="container">
         <h2>Welcome, {user.username}!</h2>     
-      </div>
+      </div> */}
+      <Typography sx={{ mb: 3, textAlign: 'center' }} variant="h5" component="div" >
+        Welcome, {user.username}!
+      </Typography>
 
-      <FormGroup row>
+      <FormGroup row sx={{ ml: 3 }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -76,13 +85,14 @@ function MedList() {
         />
       </FormGroup>
       
-        <Grid item xs={12} md={6} bgcolor='#c7ddf6'>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+        <Grid item xs={12} md={6} bgcolor='#c7ddf6' sx={{ ml: 3, mr: 3, borderRadius: 5, width: 885 }}>
+          <Typography sx={{ mt: 4, mb: 2, textAlign: 'center' }} variant="h5" component="div">
             My Prescription List
           </Typography>
           <List dense={dense}>  
           {prescriptions.map(item => {
             return (
+              <Paper elevation={3} sx={{ display: 'flex', m: 2, height: 150, width: 850, borderRadius: 5 }} >
               <ListItem
                 key={item.id}
                 secondaryAction={
@@ -91,6 +101,7 @@ function MedList() {
                   </IconButton>
                 }
               >
+                
                 <ListItemAvatar>
                   <Avatar 
                     sx={{ bgcolor: "#1976d2" }}
@@ -112,7 +123,7 @@ function MedList() {
                   secondary={secondary ? `${item.description}` : null}
                 />
 
-                  <Stack direction="row" spacing={1}>
+                  <Stack direction="row" spacing={1}  >
                     <Chip 
                       sx={{ bgcolor: '#a0b1ff' }}
                       icon={<MedicationLiquidIcon />} 
@@ -127,8 +138,9 @@ function MedList() {
                       onClick={() => { history.push(`/editMedList/${item.id}`)}}
                     />
                   </Stack>
-
+                  
                 </ListItem>
+                </Paper>
               )
             })}
           </List>

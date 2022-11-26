@@ -83,16 +83,16 @@ const headCells = [
     label: 'Notes ',
   },
   {
-    id: 'delete',
-    numeric: true,
-    disablePadding: false,
-    label: 'Delete',
-  },
-  {
     id: 'edit',
     numeric: true,
     disablePadding: false,
     label: 'Edit',
+  },
+  {
+    id: 'delete',
+    numeric: true,
+    disablePadding: false,
+    label: 'Delete',
   },
 ];
 

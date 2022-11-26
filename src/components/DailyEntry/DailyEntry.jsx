@@ -22,7 +22,7 @@ function DailyEntry() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [addDate, setAddDate] = useState('');
+    const [addDate, setAddDate] = useState(dayjs().format('L LT'));
     var utc = require('dayjs/plugin/utc')
     dayjs.extend(utc)
     var localizedFormat = require('dayjs/plugin/localizedFormat')

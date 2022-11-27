@@ -1,0 +1,17 @@
+.myBox {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Alice', serif;
+}
+
+.title {
+    justify-content: center;
+    text-align: center;
+    font-family: 'Alice', serif;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 40px;
+}

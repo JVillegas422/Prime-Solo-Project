@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import React, { useState } from 'react';
+import './DailyEntry.css';
 
 // Material-UI imports listed down below
 import Button from '@mui/material/Button';
@@ -10,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 import dateFormat from 'dateformat';
+import Stack from '@mui/material/Stack';
 
 // Material-UI imports
 import dayjs from 'dayjs';
@@ -62,24 +64,22 @@ function DailyEntry() {
 
     return (
         <>
-            <Typography variant='h3' mt={2} sx={{ p: 3 }}>
-                Create Entry Form
-            </Typography>     
+            <div className='title' >
+                Create Daily Entry
+            </div>     
 
-            <Box 
+            <Stack 
                 className='myBox'
                 component="form" 
                 mx={'auto'}
                 sx={{ 
-                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' ,bgcolor: 'white',  },
+                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' , bgcolor: 'white', borderRadius: 5 },
                     color: 'text.primary'
                 }}
                 noValidate
+                spacing={1}
                 autoComplete="off"
             >
-                <FormControl
-                    sx= {{ bgcolor: 'grey.400'}}
-                >
                 <TextField
                     required
                     id="filled-required"
@@ -105,12 +105,10 @@ function DailyEntry() {
                         renderInput={(params) => {
                             return <TextField {...params} />;
                         }}
-                        label="DateTimePicker"
                         variant="outlined"
                         // value={dayjs(addDate).format('L LT')}
                         inputFormat="YYYY/MM/DD hh:mm a"
                         value={dayjs(addDate).format('L LT')}
-                        fullWidth
                         onChange={handleAddDate}
                     />
                     </LocalizationProvider>
@@ -123,9 +121,6 @@ function DailyEntry() {
                     variant="filled"
                     onChange={(event) => setQuantity(event.target.value)}
                     value={quantity}
-                    InputLabelProps={{
-                        shrink: true,
-                      }}
                 />
 
                 <TextField
@@ -143,21 +138,22 @@ function DailyEntry() {
                 <Button
                     type="submit"
                     variant="contained"
-                    sx={{ p: 2 }}
+                    sx={{ p: 2, width: 175, borderRadius: 4 }}
                     onClick={addNewEntry}
                 >
                     Save Entry
                 </Button>
-                </FormControl>
+
+                <Chip 
+                    className='chip'
+                    label="Back to My MedList"
+                    color="primary"
+                    sx={{ height: 40 }}
+                    onClick={() => { history.push('/home')}}
+                />
                 
-            </Box>
+            </Stack>
             
-            <Chip 
-                label="Back to My MedList"
-                color="primary"
-                sx={{ m: 4, height: 40 }}
-                onClick={() => { history.push('/home')}}
-            />
         </>
     );
 }

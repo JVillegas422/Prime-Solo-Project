@@ -52,19 +52,20 @@ function MedList() {
         sx={{ 
           flexGrow: 2, 
           maxWidth: 940, 
-          bgcolor: '#a0b1ff',
-          borderRadius: 5
+          bgcolor: '#7589e4',
+          borderRadius: 5,
+          padding: 4
         }}
       >
         
       {/* <div className="container">
         <h2>Welcome, {user.username}!</h2>     
       </div> */}
-      <Typography sx={{ mb: 3, textAlign: 'center' }} variant="h5" component="div" >
-        Welcome, {user.username}!
-      </Typography>
+      <div className='medListBox' >
+        <h2>Welcome, {user.username}!</h2>
+      </div>
 
-      <FormGroup row sx={{ ml: 3 }}>
+      <FormGroup row sx={{ ml: 3, padding: 3 }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -85,14 +86,14 @@ function MedList() {
         />
       </FormGroup>
       
-        <Grid item xs={12} md={6} bgcolor='#c7ddf6' sx={{ ml: 3, mr: 3, borderRadius: 5, width: 885 }}>
-          <Typography sx={{ mt: 4, mb: 2, textAlign: 'center' }} variant="h5" component="div">
-            My Prescription List
-          </Typography>
+        <Grid item xs={12} md={6} bgcolor='#94c1f4' sx={{ ml: 3, mr: 3, borderRadius: 5, width: 885 }}>
+            <div className='myList'>
+              <h4>My Prescription List</h4>
+            </div>
           <List dense={dense}>  
           {prescriptions.map(item => {
             return (
-              <Paper elevation={3} sx={{ display: 'flex', m: 2, height: 150, width: 850, borderRadius: 5 }} >
+              <Paper elevation={3} sx={{ display: 'flex', m: 2, height: 150, width: 850, borderRadius: 5, bgcolor: "#d2edf9" }} >
               <ListItem
                 key={item.id}
                 secondaryAction={

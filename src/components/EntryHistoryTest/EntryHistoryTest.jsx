@@ -104,7 +104,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead sx={{ bgcolor: '#a6c7f4' }} >
       <TableRow>
         <TableCell >
         </TableCell>
@@ -129,6 +129,8 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell >
+        </TableCell>
       </TableRow>
     </TableHead>
   );

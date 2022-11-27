@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+
 html,
 body,
 #react-root {
@@ -5,8 +7,13 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  font-family: 'Alice', serif;
   margin: 0px;
+  /* background: linear-gradient(180deg, #FFFFFF 0%, #000000 100%), linear-gradient(90deg, #FFFFFF 0%, #000000 100%), #00FFFF;
+  background-blend-mode: multiply, screen, normal; */
+  background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  /* padding-bottom: 30px; */
 }
 
 img {
@@ -20,6 +27,7 @@ Container
 
 .container {
   padding: 20px;
+  font-family: 'Alice', serif;
 }
 
 /* --------------------------------------------------------------------------------

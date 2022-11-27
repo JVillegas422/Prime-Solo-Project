@@ -20,6 +20,7 @@ import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import MeetingRoomTwoToneIcon from '@mui/icons-material/MeetingRoomTwoTone';
+import MenuOpenTwoToneIcon from '@mui/icons-material/MenuOpenTwoTone';
 
 
 function NavTest() {
@@ -69,7 +70,7 @@ function NavTest() {
                   </ListItemIcon>
                   <Link to="/home">
                     Home
-                </Link>
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -79,8 +80,8 @@ function NavTest() {
                     <AssignmentTwoToneIcon />
                   </ListItemIcon>
                   <Link to="/daily_entry">
-                  Daily Entry
-                </Link>
+                    Daily Entry
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -90,8 +91,8 @@ function NavTest() {
                     <MedicationLiquidIcon />
                   </ListItemIcon>
                   <Link to="/prescriptionForm">
-                  Add Medz
-                </Link>
+                    Add Medz
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -101,8 +102,8 @@ function NavTest() {
                     <SearchTwoToneIcon />
                   </ListItemIcon>
                   <Link to="/search">
-                  Search Medz
-                </Link>
+                    Search Medz
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -112,8 +113,8 @@ function NavTest() {
                     <MenuBookTwoToneIcon />
                   </ListItemIcon>
                   <Link to="/testHistory">
-                  Entry Journal
-                </Link>
+                    Entry Journal
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -124,7 +125,7 @@ function NavTest() {
                   </ListItemIcon>
                   <Link to="/about">
                     About
-                </Link>
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -135,7 +136,7 @@ function NavTest() {
                   </ListItemIcon>
                   <Link to="/logout">
                     Log Out
-                </Link>
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -147,7 +148,7 @@ function NavTest() {
         <div>
           {['left'].map((anchor) => (
             <React.Fragment key={anchor}>
-              <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+              <Button onClick={toggleDrawer(anchor, true)}><MenuOpenTwoToneIcon fontSize='large'/></Button>
               <SwipeableDrawer
                 anchor={anchor}
                 open={navState[anchor]}

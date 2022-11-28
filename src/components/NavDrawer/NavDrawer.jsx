@@ -21,6 +21,7 @@ import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import MeetingRoomTwoToneIcon from '@mui/icons-material/MeetingRoomTwoTone';
 import MenuOpenTwoToneIcon from '@mui/icons-material/MenuOpenTwoTone';
+import MenuOpenSharpIcon from '@mui/icons-material/MenuOpenSharp';
 
 
 function NavDrawer() {
@@ -151,7 +152,7 @@ function NavDrawer() {
         <div>
           {['left'].map((anchor) => (
             <React.Fragment key={anchor}>
-              <Button onClick={toggleDrawer(anchor, true)}><MenuOpenTwoToneIcon fontSize='large'/></Button>
+              <Button onClick={toggleDrawer(anchor, true)}><MenuOpenSharpIcon fontSize='large' sx={{ color: 'black' }}/></Button>
               <SwipeableDrawer
                 anchor={anchor}
                 open={navState[anchor]}

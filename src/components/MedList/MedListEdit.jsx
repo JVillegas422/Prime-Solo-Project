@@ -47,7 +47,7 @@ function MedListEdit() {
                     component="form" 
                     mx={'auto'}
                     sx={{ 
-                        '& .MuiTextField-root': { p: 6, width: '22rem', height: '7rem' , bgcolor: 'white', borderRadius: 5 },
+                        '& .MuiTextField-root': { p: 6, width: '22rem', height: '7rem' , bgcolor: '#def6fd', borderRadius: 5 },
                         color: 'text.primary'
                     }}
                     noValidate

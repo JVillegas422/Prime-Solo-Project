@@ -13,6 +13,8 @@ import Paper from '@mui/material/Paper';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import Swal from 'sweetalert2';
+import Chip from '@mui/material/Chip';
 
 
 function SearchForm() {
@@ -47,6 +49,33 @@ function SearchForm() {
         });
     }, []);
 
+    // const sweetAlert = () => {
+    //     Swal.fire(
+    //         'This Prescription has been add to your list!',
+    //         'success'
+    //       )
+    // }
+
+    const sweetAlert = () => {
+        Swal.fire({
+            title: 'Are you sure you want to add this prescription?',
+            text: "Confirm if this is the right prescription!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            Swal.fire(
+                'Added!',
+                'Your prescription has been added to your list.',
+                'success'
+            )
+        }
+    })
+}
+ 
 
     return (
         <>
@@ -63,6 +92,16 @@ function SearchForm() {
                     type="submit" 
                     value="Find Prescription" 
                 />
+
+                {/* <Chip
+                    variant="contained" 
+                    label="Find Prescription"
+                    color="primary" 
+                    type="submit" 
+                    value="Find Prescription" 
+                >
+
+                </Chip> */}
             </form>
 
             <h2 className='textColor'>Results</h2>
@@ -114,7 +153,7 @@ function SearchForm() {
                             </TableCell>
                         
                             <TableCell align="right">
-                                <Button variant="contained" >
+                                <Button variant="contained" onClick={sweetAlert}>
                                     <AddBoxIcon />
                                 </Button>
                             </TableCell>

@@ -56,7 +56,7 @@ function MedList() {
   //   })
   // }
 
-//   const sweetAlert = () => {
+//   const handleDelete = () => {
 //     Swal.fire({
 //         title: 'Are you sure you want to delete this prescription?',
 //         text: "You won't be able to revert this!",
@@ -72,6 +72,10 @@ function MedList() {
 //             'Your prescription has been deleted.',
 //             'success'
 //         )
+//         dispatch({ 
+//           type: 'DELETE_PRESCRIPTION', 
+//           payload: item.id 
+//         })
 //         }
 //     })
 // }

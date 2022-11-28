@@ -4,6 +4,10 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
 import NavDrawer from '../NavDrawer/NavDrawer';
+import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
+import MedicationOutlinedIcon from '@mui/icons-material/MedicationOutlined';
+
+
 function Nav() {
   const user = useSelector((store) => store.user);
 
@@ -11,7 +15,7 @@ function Nav() {
     <div className="nav">
       <NavDrawer />
       <Link to="/home">
-        <h2 className="nav-title">TrackPreScripts</h2>
+        <h2 className="nav-title"><MedicationOutlinedIcon sx={{ fontSize: 40, alignItems: 'center' }} /> TrackScripts</h2>
       </Link>
       <div>
 

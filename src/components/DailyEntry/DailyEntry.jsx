@@ -37,14 +37,28 @@ function DailyEntry() {
     const [notes, setNotes] = useState('');
 
     const addNewEntry = () => {
-        console.log('in handleClick',addDate);
-        const newEntry = {
-            prescription_name: prescription_name,
-            prescription_amount: prescription_amount,
-            addDate: addDate,
-            quantity: quantity,
-            notes: notes,
-        }
+        Swal.fire({
+            title: 'Are you sure you want to add this entry?',
+            text: "You can review this in history page!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add entry!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Added!',
+                    'Your Entry has been added.',
+                    'success'
+                )
+            const newEntry = {
+                prescription_name: prescription_name,
+                prescription_amount: prescription_amount,
+                addDate: addDate,
+                quantity: quantity,
+                notes: notes,
+            }
         dispatch({
             type: 'ADD_NEW_ENTRY',
             payload: newEntry
@@ -55,8 +69,19 @@ function DailyEntry() {
         setAddDate('');
         setQuantity('');
         setNotes('');
-        // history.push('/testHistory');
+        // history.push('/history');
+        setTimeout(() => {history.push("/history")}, 2000)
+            }
+        })        
     }
+
+    // const sweetAlert = () => {
+    //     Swal.fire(
+    //         'This Prescription has been add to your list!',
+    //         'success'
+    //       )
+    //       history.push('/history');
+    // }
 
     // const sweetAlert = () => {
     //     Swal.fire({
@@ -81,6 +106,14 @@ function DailyEntry() {
     //     })
     // }
 
+
+    const fillForm = () => {
+        setPrescription_Name('Dilaudid');
+        setPrescription_Amount('3mg');
+        setQuantity(1);
+        setNotes('Only need to take 1 for now');
+    }
+
     const handleAddDate = (value) => {
         console.log('in handleAddDate Value is:', value.$d)
         setAddDate(value);
@@ -88,7 +121,7 @@ function DailyEntry() {
 
     return (
         <>
-            <div className='title' >
+            <div className='title' onClick={fillForm}>
                 Create Daily Entry
             </div>     
 
@@ -97,7 +130,7 @@ function DailyEntry() {
                 component="form" 
                 mx={'auto'}
                 sx={{ 
-                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' , bgcolor: 'white', borderRadius: 5 },
+                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' , bgcolor: '#def6fd', borderRadius: 5 },
                     color: 'text.primary'
                 }}
                 noValidate

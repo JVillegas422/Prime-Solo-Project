@@ -44,7 +44,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className='radiant'>
         <Nav />
         
         <Switch>

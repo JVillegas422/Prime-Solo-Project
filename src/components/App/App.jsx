@@ -24,10 +24,13 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import DailyEntry from '../DailyEntry/DailyEntry';
 import SearchForm from '../SearchForm/SearchForm';
 import EntryHistory from '../EntryHistory/EntryHistory';
-import EntryHistoryTest from '../EntryHistoryTest/EntryHistoryTest';
 import MedList from '../MedList/MedList';
 import PrescriptionForm from '../PrescriptionForm/PrescriptionForm';
 import MedListEdit from '../MedList/MedListEdit';
+
+
+import NavDrawer from '../NavDrawer/NavDrawer';
+
 import './App.css';
 
 function App() {
@@ -43,6 +46,7 @@ function App() {
     <Router>
       <div>
         <Nav />
+        
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -139,12 +143,12 @@ function App() {
             <SearchForm />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             exact
             path="/testHistory"
           >
             <EntryHistoryTest />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
           
           <ProtectedRoute
             exact
@@ -165,6 +169,13 @@ function App() {
             path="/prescriptionForm"
           >
             <PrescriptionForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/navDrawer"
+          >
+            <NavDrawer />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

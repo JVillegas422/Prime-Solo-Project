@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // MUI IMPORTS
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 function MedListEdit() {
     console.log('in MedListEdit page');
@@ -40,25 +38,22 @@ function MedListEdit() {
 
     return (
         <>
-            <h3>MedList Edit page</h3>
-
-        <Typography variant='h3' mt={2} sx={{ p: 3 }}>
-                Edit Prescription Form
-            </Typography>     
-
-            <Box 
-                className='myBox'
-                component="form" 
-                mx={'auto'}
-                sx={{ 
-                    '& .MuiTextField-root': { p: 6, width: '22rem', height: '7rem' , bgcolor: 'white',  },
-                    color: 'text.primary'
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={onSubmit}
-            >
-                <FormControl
+                <div className='title'>
+                     Edit Prescription Form
+                </div> 
+                
+                <Stack
+                    className='myBox'
+                    component="form" 
+                    mx={'auto'}
+                    sx={{ 
+                        '& .MuiTextField-root': { p: 6, width: '22rem', height: '7rem' , bgcolor: 'white', borderRadius: 5 },
+                        color: 'text.primary'
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    spacing={1}
+                    onSubmit={onSubmit}
                 >
                 <TextField
                     label="Prescription"
@@ -106,16 +101,14 @@ function MedListEdit() {
                 >
                     Save Edit
                 </Button>
-                </FormControl>
-                
-            </Box>
-            
-            <Chip 
-                label="Back to My MedList"
-                color="primary"
-                sx={{ m: 4, height: 40 }}
-                onClick={() => { history.push('/home')}}
-            />
+
+                <Chip 
+                    label="Cancel"
+                    color="primary"
+                    sx={{ m: 4, height: 40 }}
+                    onClick={() => { history.push('/home')}}
+                />
+                </Stack>
         </>
     );
 }

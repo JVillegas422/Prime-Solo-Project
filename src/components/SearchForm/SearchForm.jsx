@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
+import './SearchForm.css';
 
 // MUI Imports
 import Table from '@mui/material/Table';
@@ -47,7 +48,7 @@ function SearchForm() {
 
     return (
         <>
-            <h2>Search For A Prescription</h2>
+            <h2 className='textColor'>Search For A Prescription</h2>
 
             <form onSubmit={onSearch}>
                 <input
@@ -61,7 +62,7 @@ function SearchForm() {
                 />
             </form>
 
-            <h2>Results</h2>
+            <h2 className='textColor'>Results</h2>
           
             {/* <ul>
                 {newArr.map(items => (items.map(nameItem => (

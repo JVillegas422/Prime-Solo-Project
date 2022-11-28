@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import './MedList.css';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,6 +18,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import Swal from 'sweetalert2';
+
 
 
 // MUI Chip
@@ -42,20 +48,57 @@ function MedList() {
       })
   }, [])
 
+  // const handleDelete = () => {
+  //   console.log('delete prescription');
+  //   dispatch({ 
+  //     type: 'DELETE_PRESCRIPTION', 
+  //     payload: item.id 
+  //   })
+  // }
+
+//   const sweetAlert = () => {
+//     Swal.fire({
+//         title: 'Are you sure you want to delete this prescription?',
+//         text: "You won't be able to revert this!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//         Swal.fire(
+//             'Deleted!',
+//             'Your prescription has been deleted.',
+//             'success'
+//         )
+//         }
+//     })
+// }
+
 
   return (
     <>
-      <Box 
-      sx={{ 
-        flexGrow: 2, maxWidth: 850, 
-        bgcolor: '#a0b1ff'
-      }}>
+    <Container>
+      <Stack 
+        className='allItems'
+        sx={{ 
+          flexGrow: 1, 
+          maxWidth: 940, 
+          bgcolor: '#7589e4',
+          borderRadius: 5,
+          padding: 9
+        }}
+      >
         
-      <div className="container">
+      {/* <div className="container">
         <h2>Welcome, {user.username}!</h2>     
+      </div> */}
+      <div className='medListBox' >
+        <h2 className='textColor'>Welcome, {user.username}!</h2>
       </div>
 
-      <FormGroup row>
+      <FormGroup row sx={{ ml: 3, padding: 2 }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -76,13 +119,14 @@ function MedList() {
         />
       </FormGroup>
       
-        <Grid item xs={12} md={6} bgcolor='#c7ddf6'>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            My Prescription List
-          </Typography>
+        <Grid item xs={12} md={6} bgcolor='#94c1f4' sx={{ borderRadius: 5, width: 885 }}>
+            <div className='myList'>
+              <h4>My Prescription List</h4>
+            </div>
           <List dense={dense}>  
           {prescriptions.map(item => {
             return (
+              <Paper elevation={3} sx={{ display: 'flex', m: 2, height: 150, width: 850, borderRadius: 5, bgcolor: "#d2edf9" }} >
               <ListItem
                 key={item.id}
                 secondaryAction={
@@ -91,6 +135,7 @@ function MedList() {
                   </IconButton>
                 }
               >
+                
                 <ListItemAvatar>
                   <Avatar 
                     sx={{ bgcolor: "#1976d2" }}
@@ -112,7 +157,7 @@ function MedList() {
                   secondary={secondary ? `${item.description}` : null}
                 />
 
-                  <Stack direction="row" spacing={1}>
+                  <Stack direction="row" spacing={1}  >
                     <Chip 
                       sx={{ bgcolor: '#a0b1ff' }}
                       icon={<MedicationLiquidIcon />} 
@@ -127,14 +172,16 @@ function MedList() {
                       onClick={() => { history.push(`/editMedList/${item.id}`)}}
                     />
                   </Stack>
-
+                  
                 </ListItem>
+                </Paper>
               )
             })}
           </List>
 
         </Grid>
-      </Box>
+      </Stack>
+      </Container>
 
     </>
   );

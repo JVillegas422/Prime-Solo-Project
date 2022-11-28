@@ -23,7 +23,7 @@ import MeetingRoomTwoToneIcon from '@mui/icons-material/MeetingRoomTwoTone';
 import MenuOpenTwoToneIcon from '@mui/icons-material/MenuOpenTwoTone';
 
 
-function NavTest() {
+function NavDrawer() {
     const user = useSelector((store) => store.user);
   
     const [navState, setNavState] = useState({
@@ -41,6 +41,16 @@ function NavTest() {
     
         setNavState({ ...navState, [anchor]: open });
       };
+
+    //   const links = [
+    //     { to: '/home', name: 'Home', icon: <HomeTwoToneIcon /> },
+    //     { to: "/daily_entry", name: 'Daily Entry', icon: <AssignmentTwoToneIcon /> },
+    //     { to: '/prescriptionForm', name: 'Add Prescription', icon: <MedicationLiquidIcon /> },
+    //     { to: '/search', name: 'Search', icon: <SearchTwoToneIcon /> },
+    //     { to: '/testHistory', name: 'Entry Journal', icon: <MenuBookTwoToneIcon /> },
+    //     { to: '/about', name: 'About', icon: <InfoTwoToneIcon /> },
+    //     { to: '/logout', name: 'Logout', icon: <MeetingRoomTwoToneIcon /> },
+    //   ];
     
       const list = (anchor) => (
         <Box
@@ -50,17 +60,12 @@ function NavTest() {
           onKeyDown={toggleDrawer(anchor, false)}
         >
           <List>
-            {/* {['Home', 'Daily Entry', 'Add Prescription', 'Search', 'Entry Journal', 'About, Log Out'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <HomeTwoToneIcon /> : <AssignmentTwoToneIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
+            {/* {links.map(link => (
+                <ListItem key={link.name} disablePadding>
+                {link.icon}<Link to = {link.to}>
+                <ListItemText primary = {link.name}/></Link>
+                </ListItem >
             ))}
-          </List>
         </Box>
       ); */}
               <ListItem disablePadding>
@@ -91,7 +96,7 @@ function NavTest() {
                     <MedicationLiquidIcon />
                   </ListItemIcon>
                   <Link to="/prescriptionForm">
-                    Add Medz
+                    Add Prescription
                   </Link>
                 </ListItemButton>
               </ListItem>
@@ -102,7 +107,7 @@ function NavTest() {
                     <SearchTwoToneIcon />
                   </ListItemIcon>
                   <Link to="/search">
-                    Search Medz
+                    Search Prescription
                   </Link>
                 </ListItemButton>
               </ListItem>
@@ -112,7 +117,7 @@ function NavTest() {
                   <ListItemIcon>
                     <MenuBookTwoToneIcon />
                   </ListItemIcon>
-                  <Link to="/testHistory">
+                  <Link to="/history">
                     Entry Journal
                   </Link>
                 </ListItemButton>
@@ -134,9 +139,7 @@ function NavTest() {
                   <ListItemIcon>
                     <MeetingRoomTwoToneIcon />
                   </ListItemIcon>
-                  <Link to="/logout">
-                    Log Out
-                  </Link>
+                  <LogOutButton />
                 </ListItemButton>
               </ListItem>
 
@@ -163,5 +166,5 @@ function NavTest() {
       );
     }
   
-  export default NavTest;
+  export default NavDrawer;
   

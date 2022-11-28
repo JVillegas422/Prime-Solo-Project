@@ -20,6 +20,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 
 import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import Swal from 'sweetalert2';
+
 
 
 // MUI Chip
@@ -45,16 +48,46 @@ function MedList() {
       })
   }, [])
 
+  // const handleDelete = () => {
+  //   console.log('delete prescription');
+  //   dispatch({ 
+  //     type: 'DELETE_PRESCRIPTION', 
+  //     payload: item.id 
+  //   })
+  // }
+
+//   const sweetAlert = () => {
+//     Swal.fire({
+//         title: 'Are you sure you want to delete this prescription?',
+//         text: "You won't be able to revert this!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//         Swal.fire(
+//             'Deleted!',
+//             'Your prescription has been deleted.',
+//             'success'
+//         )
+//         }
+//     })
+// }
+
 
   return (
     <>
-      <Box 
+    <Container>
+      <Stack 
+        className='allItems'
         sx={{ 
-          flexGrow: 2, 
+          flexGrow: 1, 
           maxWidth: 940, 
           bgcolor: '#7589e4',
           borderRadius: 5,
-          padding: 4
+          padding: 9
         }}
       >
         
@@ -62,10 +95,10 @@ function MedList() {
         <h2>Welcome, {user.username}!</h2>     
       </div> */}
       <div className='medListBox' >
-        <h2>Welcome, {user.username}!</h2>
+        <h2 className='textColor'>Welcome, {user.username}!</h2>
       </div>
 
-      <FormGroup row sx={{ ml: 3, padding: 3 }}>
+      <FormGroup row sx={{ ml: 3, padding: 2 }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -86,7 +119,7 @@ function MedList() {
         />
       </FormGroup>
       
-        <Grid item xs={12} md={6} bgcolor='#94c1f4' sx={{ ml: 3, mr: 3, borderRadius: 5, width: 885 }}>
+        <Grid item xs={12} md={6} bgcolor='#94c1f4' sx={{ borderRadius: 5, width: 885 }}>
             <div className='myList'>
               <h4>My Prescription List</h4>
             </div>
@@ -147,7 +180,8 @@ function MedList() {
           </List>
 
         </Grid>
-      </Box>
+      </Stack>
+      </Container>
 
     </>
   );

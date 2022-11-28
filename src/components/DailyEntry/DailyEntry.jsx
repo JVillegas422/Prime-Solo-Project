@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 import dateFormat from 'dateformat';
 import Stack from '@mui/material/Stack';
+import Swal from 'sweetalert2';
 
 // Material-UI imports
 import dayjs from 'dayjs';
@@ -56,6 +57,29 @@ function DailyEntry() {
         setNotes('');
         // history.push('/testHistory');
     }
+
+    // const sweetAlert = () => {
+    //     Swal.fire({
+    //         title: 'Are you sure you want to delete this prescription?',
+    //         text: "You won't be able to revert this!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Yes, delete it!'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //         Swal.fire(
+    //             'Deleted!',
+    //             'Your prescription has been deleted.',
+    //             'success'
+    //         )
+    //         }
+    //         else {
+    //             addNewEntry();
+    //         }
+    //     })
+    // }
 
     const handleAddDate = (value) => {
         console.log('in handleAddDate Value is:', value.$d)
@@ -146,7 +170,7 @@ function DailyEntry() {
 
                 <Chip 
                     className='chip'
-                    label="Back to My MedList"
+                    label="Cancel"
                     color="primary"
                     sx={{ height: 40 }}
                     onClick={() => { history.push('/home')}}

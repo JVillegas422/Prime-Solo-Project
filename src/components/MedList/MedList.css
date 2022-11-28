@@ -4,14 +4,15 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding-left: 20px;
+    padding: 20px;
     font-family: 'Alice', serif;
 }
 
 .medListBox {
     font-family: 'Alice', serif;
     text-align: center;
-    padding-bottom: 30px;
+    font-size: 25px;
+    padding-bottom: 10px;
 }
 
 .myList {
@@ -25,7 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding-left: 20px;
+    padding: 20px;
     font-family: 'Alice', serif;
 }
 
@@ -42,4 +43,13 @@ body {
 .formbox {
     justify-content: center;
     text-align: center;
+}
+
+.allItems {
+    justify-content: center;
+    align-items: center;
+}
+
+.textColor {
+    color: white;
 }

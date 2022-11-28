@@ -12,6 +12,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+
 
 function SearchForm() {
     console.log('in SearchForm');
@@ -48,6 +50,7 @@ function SearchForm() {
 
     return (
         <>
+            <div className='aboveSearch'>
             <h2 className='textColor'>Search For A Prescription</h2>
 
             <form onSubmit={onSearch}>
@@ -63,6 +66,7 @@ function SearchForm() {
             </form>
 
             <h2 className='textColor'>Results</h2>
+            </div>
           
             {/* <ul>
                 {newArr.map(items => (items.map(nameItem => (
@@ -75,10 +79,10 @@ function SearchForm() {
             {/**
              * Test Table
              */}
-
+            <Container>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 750 }} aria-label="simple table">
-                    <TableHead>
+                    <TableHead sx={{ bgcolor: '#a6c7f4' }}>
                         <TableRow>
                             <TableCell>Prescription Name</TableCell>
                             <TableCell>Product Number</TableCell>
@@ -119,7 +123,7 @@ function SearchForm() {
                     </TableBody>
                 </Table>
             </TableContainer>
-
+            </Container>
         </>
     );
 }

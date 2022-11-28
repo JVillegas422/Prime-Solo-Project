@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 import PrescriptionSelect from './PrescriptionSelect';
 
@@ -24,12 +25,33 @@ function PrescriptionForm() {
 
      const addPrescription = (evt) => {
         evt.preventDefault();
-        dispatch({
-            type: 'ADD_PRESCRIPTION',
-            payload: newPrescription
-        })
-        console.log('here is a newPrescription', newPrescription);
-        history.push('/home');
+        Swal.fire({
+            title: 'Are you sure you want to add this prescription?',
+            text: "You can edit or delete in your medlist page!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Added!',
+                    'Your Entry has been added.',
+                    'success'
+                )
+                dispatch({
+                    type: 'ADD_PRESCRIPTION',
+                    payload: newPrescription
+                })
+                console.log('here is a newPrescription', newPrescription);
+                // history.push('/home');
+                setTimeout(() => {history.push("/home")}, 2000)
+            }
+          })
+        
+        
+        
     }
 
     return (

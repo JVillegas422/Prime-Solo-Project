@@ -30,6 +30,11 @@ function AboutPage() {
           <p>Express</p>
           <p>FDA Prescription Drugs API</p>
         </div>
+        <div>
+          <h3>Future updates:</h3>
+          <p>Ability to set alarms and/or text notifications.</p>
+          <p>Add additional search parameters in the FDA API</p>
+        </div>
       </Card>
     </Container>
     </>

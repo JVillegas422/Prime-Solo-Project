@@ -65,7 +65,7 @@ function PrescriptionForm() {
                 component="form" 
                 mx={'auto'}
                 sx={{ 
-                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' ,bgcolor: 'white', borderRadius: 5 },
+                    '& .MuiTextField-root': { p: 6, width: '18rem', height: '4rem' ,bgcolor: '#def6fd', borderRadius: 5 },
                     color: 'text.primary'
                 }}
                 noValidate

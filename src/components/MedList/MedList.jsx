@@ -48,38 +48,30 @@ function MedList() {
       })
   }, [])
 
-  // const handleDelete = () => {
-  //   console.log('delete prescription');
-  //   dispatch({ 
-  //     type: 'DELETE_PRESCRIPTION', 
-  //     payload: item.id 
-  //   })
-  // }
-
-//   const handleDelete = () => {
-//     Swal.fire({
-//         title: 'Are you sure you want to delete this prescription?',
-//         text: "You won't be able to revert this!",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonColor: '#3085d6',
-//         cancelButtonColor: '#d33',
-//         confirmButtonText: 'Yes, delete it!'
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//         Swal.fire(
-//             'Deleted!',
-//             'Your prescription has been deleted.',
-//             'success'
-//         )
-//         dispatch({ 
-//           type: 'DELETE_PRESCRIPTION', 
-//           payload: item.id 
-//         })
-//         }
-//     })
-// }
-
+  const handleDelete = (itemId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        dispatch({ 
+          type: 'DELETE_PRESCRIPTION', 
+          payload: itemId 
+        })
+      }
+    })
+    console.log('item id', itemId)
+  }
 
   return (
     <>
@@ -134,7 +126,7 @@ function MedList() {
               <ListItem
                 key={item.id}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete" onClick={() => dispatch({ type: 'DELETE_PRESCRIPTION', payload: item.id })} >
+                  <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(item.id)} >
                     <DeleteIcon />
                   </IconButton>
                 }

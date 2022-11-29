@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import './SearchForm.css';
 
 // MUI Imports
@@ -23,6 +24,7 @@ function SearchForm() {
     const [searchParams, setSearchParams] = useState('');
     const results = useSelector(store => store.searchReducer);
     const searchResults = results.searchList;
+    const history = useHistory();
     console.log('searchResults', searchResults);
 
     let newArr = [];
@@ -49,13 +51,6 @@ function SearchForm() {
         });
     }, []);
 
-    // const sweetAlert = () => {
-    //     Swal.fire(
-    //         'This Prescription has been add to your list!',
-    //         'success'
-    //       )
-    // }
-
     const sweetAlert = () => {
         Swal.fire({
             title: 'Are you sure you want to add this prescription?',
@@ -67,14 +62,15 @@ function SearchForm() {
             confirmButtonText: 'Yes, add it!'
         }).then((result) => {
             if (result.isConfirmed) {
-            Swal.fire(
-                'Added!',
-                'Your prescription has been added to your list.',
-                'success'
-            )
-        }
-    })
-}
+                Swal.fire(
+                    'Added!',
+                    'Prescription added to your list.',
+                    'success'
+                )
+            }
+        })
+        setTimeout(() => {history.push("/home")}, 2000)
+    }
  
 
     return (
@@ -145,7 +141,7 @@ function SearchForm() {
                             </TableCell>
                         
                             <TableCell align="right">
-                                <Button variant="contained" onClick={sweetAlert}>
+                                <Button variant="contained" onClick={sweetAlert} >
                                     <AddBoxIcon />
                                 </Button>
                             </TableCell>

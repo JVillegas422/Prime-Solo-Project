@@ -86,22 +86,14 @@ function SearchForm() {
                 <input
                     type="text"
                     value={searchParams}
+                    className='inputField'
                     onChange={evt => setSearchParams(evt.target.value)}
                 />
                 <input 
                     type="submit" 
                     value="Find Prescription" 
+                    className='inputBtn'
                 />
-
-                {/* <Chip
-                    variant="contained" 
-                    label="Find Prescription"
-                    color="primary" 
-                    type="submit" 
-                    value="Find Prescription" 
-                >
-
-                </Chip> */}
             </form>
 
             <h2 className='textColor'>Results</h2>

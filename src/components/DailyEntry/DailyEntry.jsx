@@ -75,38 +75,6 @@ function DailyEntry() {
         })        
     }
 
-    // const sweetAlert = () => {
-    //     Swal.fire(
-    //         'This Prescription has been add to your list!',
-    //         'success'
-    //       )
-    //       history.push('/history');
-    // }
-
-    // const sweetAlert = () => {
-    //     Swal.fire({
-    //         title: 'Are you sure you want to delete this prescription?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //         Swal.fire(
-    //             'Deleted!',
-    //             'Your prescription has been deleted.',
-    //             'success'
-    //         )
-    //         }
-    //         else {
-    //             addNewEntry();
-    //         }
-    //     })
-    // }
-
-
     const fillForm = () => {
         setPrescription_Name('Dilaudid');
         setPrescription_Amount('3mg');

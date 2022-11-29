@@ -8,6 +8,12 @@ function LoginForm() {
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
 
+  // Fill for Presentation
+  const fillForm = () => {
+    setUsername('Kelsey');
+    setPassword('0987');
+}
+
   const login = (event) => {
     event.preventDefault();
 
@@ -26,7 +32,7 @@ function LoginForm() {
 
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <h2 onClick={fillForm}>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}

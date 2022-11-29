@@ -28,7 +28,7 @@ function AboutPage() {
           <p>Postgresql</p>
           <p>Axios</p>
           <p>Express</p>
-          <p>FDA Prescription Drugs API</p>
+          <p>FDA Prescription Drug API</p>
         </div>
         <div>
           <h3>Future updates:</h3>

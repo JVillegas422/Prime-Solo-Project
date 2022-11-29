@@ -20,20 +20,22 @@ function AboutPage() {
         </div>
         <div>
           <h3>Technologies used:</h3>
+          <p>FDA Prescription Drug API</p>
           <p>React</p>
           <p>Redux</p>
           <p>Redux-Sagas</p>
-          <p>MUI</p>
+          <p>Material UI</p>
           <p>Passport</p>
           <p>Postgresql</p>
           <p>Axios</p>
           <p>Express</p>
-          <p>FDA Prescription Drug API</p>
+          <p>Dayjs</p>
+          <p>Sweet Alert2</p>
         </div>
         <div>
-          <h3>Future updates:</h3>
-          <p>Ability to set alarms and/or text notifications.</p>
-          <p>Add additional search parameters in the FDA API</p>
+          <h3>Future add ons:</h3>
+          <p>Ability to set alarms and/or add text notifications.</p>
+          <p>Add additional search parameters to FDA API search.</p>
         </div>
       </Card>
     </Container>
